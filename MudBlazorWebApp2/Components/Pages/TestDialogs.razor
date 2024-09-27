@@ -1,0 +1,72 @@
+﻿@page "/"
+@using MudBlazorWebApp2.Dialogs
+
+
+@inject IDialogService DialogService
+
+
+<MudPaper Class="mt-5 pa-9">
+
+    <MudButton @onclick="OpenSimpleDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
+        Open plain Dialog
+    </MudButton>
+
+    <h4>@SimpleDialogResultMessage</h4>
+
+ </MudPaper>
+
+<MudPaper Class="mt-5 pa-9">
+
+    <MudButton @onclick="OpenStringDialogAsync" Variant="Variant.Filled" Color="Color.Warning">
+        Open _STRING_ Dialog
+    </MudButton>
+
+    <h4>@SimpleDialogStringResult</h4>
+
+</MudPaper>
+
+
+
+
+@code {
+
+    private string SimpleDialogResultMessage { get; set; } = string.Empty;
+    
+    private string SimpleDialogStringResult { get; set; } = string.Empty;
+
+
+    private async Task OpenStringDialogAsync()
+    {
+        var TheDialog = DialogService.Show<StringDialog>();
+        var DialogResult = await TheDialog.Result;
+
+        if (DialogResult.Canceled)
+        {
+            SimpleDialogStringResult = "STRING Dialog was cancellllllled.";
+        }
+        else
+        {
+            SimpleDialogStringResult = $"You entered: {DialogResult.Data?.ToString()}";
+        }
+    }
+
+
+
+
+
+    private async Task OpenSimpleDialogAsync()
+    {
+        var TheDialog = DialogService.Show<SimpleDialog>();
+        var DialogResult = await TheDialog.Result;
+
+        if (DialogResult.Canceled)
+        {
+            SimpleDialogResultMessage = "Dialog was cancellllllled.";
+        }
+        else
+        {
+            SimpleDialogResultMessage = "Dialog returned Ok.";
+        }
+    }
+}
+

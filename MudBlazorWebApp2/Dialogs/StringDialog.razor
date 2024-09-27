@@ -1,0 +1,33 @@
+﻿@using MudBlazor
+
+
+
+<MudDialog>
+    
+    <DialogContent>
+        <MudTextField @bind-Value="DataToReturn" Label="Enter a string" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="OnCancel">Cancel</MudButton>
+        <MudButton OnClick="OnSubmit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+
+
+
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+
+    private string DataToReturn = string.Empty;
+
+
+
+    private void OnSubmit() => MudDialog.Close(DialogResult.Ok(DataToReturn));
+
+    private void OnCancel() => MudDialog.Cancel();
+}
+
