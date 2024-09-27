@@ -28,11 +28,46 @@
 
 
 
+<MudPaper Class="mt-5 pa-9">
+
+    <MudButton @onclick="OpenComplexDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
+        Open _POCO_ Dialog
+    </MudButton>
+
+    <h4>@ComplexDialogResult</h4>
+
+</MudPaper>
+
+
+
+
 @code {
 
     private string SimpleDialogResultMessage { get; set; } = string.Empty;
     
     private string SimpleDialogStringResult { get; set; } = string.Empty;
+
+    private string ComplexDialogResult { get; set; } = string.Empty;
+
+
+
+
+    private async Task OpenComplexDialogAsync()
+    {
+        var TheDialog = DialogService.Show<ComplexDialog>("This is a POCO Dialog");
+        var DialogResult = await TheDialog.Result;
+
+        if (DialogResult.Canceled)
+        {
+            ComplexDialogResult = "Dialog was cancellllllled.";
+        }
+        else
+        {
+            
+            ComplexDialogResult = $"You entered: {DialogResult.Data?.ToString()}";
+        }
+    }
+
 
 
     private async Task OpenStringDialogAsync()
@@ -68,5 +103,11 @@
             SimpleDialogResultMessage = "Dialog returned Ok.";
         }
     }
+
+
+
+
+
+
 }
 
