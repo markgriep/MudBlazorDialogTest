@@ -12,6 +12,6 @@ namespace MudBlazorWebApp2.Models
     {
         public string? EmployeeName { get; set; }
         public int EmployeeId { get; set; }
-        public DateTime EmployeeDepartment { get; set; }
+        public DateTime? EmployeeBirthDate { get; set; }
     }
 }

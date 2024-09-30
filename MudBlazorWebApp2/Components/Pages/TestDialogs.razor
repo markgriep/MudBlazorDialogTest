@@ -19,7 +19,7 @@
 
 <MudPaper Class="mt-5 pa-9">
 
-    <MudButton @onclick="OpenStringDialogAsync" Variant="Variant.Filled" Color="Color.Warning">
+    <MudButton @onclick="OpenStringDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
         Open _STRING_ Dialog
     </MudButton>
 
@@ -30,7 +30,7 @@
 
 <MudPaper Class="mt-5 pa-9">
 
-    <MudButton @onclick="OpenComplexDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
+    <MudButton @onclick="OpenComplexDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
         Open _POCO_ Dialog
     </MudButton>
    
@@ -53,19 +53,18 @@
 
     @if (ComplexDialogResultEmployee != null)
     {
-        <h4>@ComplexDialogResultEmployee.Name</h4>
-        <h4>@ComplexDialogResultEmployee.EmployeeId</h4>
-        <h4>@ComplexDialogResultEmployee.Department</h4>
+        <h4>@_SuperEmployee.EmployeeName</h4>
+        <h4>@_SuperEmployee.EmployeeId</h4>
+        <h4>@_SuperEmployee.EmployeeBirthDate</h4>
     }
-
+    <h4>@SimpleDialogStringResult</h4>
 </MudPaper>
 
 
 
 
-
 @code {
-
+    //################################################################################################################################################
     private string SimpleDialogResultMessage { get; set; } = string.Empty;
 
     private string SimpleDialogStringResult { get; set; } = string.Empty;
@@ -73,12 +72,12 @@
     private string ComplexDialogResult { get; set; } = string.Empty;
     private Employee ComplexDialogResultEmployee = new Employee();
 
-
+    private SuperEmployee _SuperEmployee = new SuperEmployee();
 
 
     private async Task OpenSuperComplexDialogAsync()
     {
-        var TheDialog = DialogService.Show<ComplexEmployeeDialog>("This is a POCO Dialog");
+        var TheDialog = DialogService.Show<SuperComplexEmployeeDialog>("Super Employee");
         var DialogResult = await TheDialog.Result;
 
         if (DialogResult.Canceled)
@@ -87,9 +86,18 @@
         }
         else
         {
-            ComplexDialogResultEmployee = DialogResult.Data as Employee;
-            ComplexDialogResult = $"Name: {ComplexDialogResultEmployee.Name},    Department: {ComplexDialogResultEmployee.Department},    EmployeeId: {ComplexDialogResultEmployee.EmployeeId}";
+
+            _SuperEmployee = DialogResult.Data as SuperEmployee;
+            ComplexDialogResult = $"Name: {_SuperEmployee.EmployeeName},    Bday: {_SuperEmployee.EmployeeBirthDate},    EmployeeId: {_SuperEmployee.EmployeeId}";
             Debug.WriteLine("");
+
+
+
+            // var x = DialogResult.Data as SuperEmployee;
+
+            // _SuperEmployee = x; = DialogResult.Data as SuperEmployee;
+
+            // ComplexDialogResult = $"Name: {_SuperEmployee.EmployeeName},    Bday: {_SuperEmployee.EmployeeBirthDate},    EmployeeId: {_SuperEmployee.EmployeeId}";
 
 
         }

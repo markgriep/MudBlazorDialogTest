@@ -2,18 +2,21 @@
 @using MudBlazorWebApp2.Models
 
 
-
+<h1>THIS IS THE ONENNNNNN</h1>
 <MudDialog>
-    
+
     <DialogContent>
         <MudTextField @bind-Value="TheEmployee.EmployeeName" Label="Name" />
-        <MudTextField @bind-Value="TheEmployee.EmployeeDepartment" Label="Dept" />
+      
+        <MudDatePicker @bind-Date="TheEmployee.EmployeeBirthDate" Label="Department Join Date" />
         <MudTextField @bind-Value="TheEmployee.EmployeeId" Label="Employee#" />
     </DialogContent>
+
     <DialogActions>
         <MudButton OnClick="OnCancel">Cancel</MudButton>
         <MudButton OnClick="OnSubmit">Ok</MudButton>
     </DialogActions>
+
 </MudDialog>
 
 
@@ -25,9 +28,6 @@
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
 
-    // private string EmployeeName = string.Empty;
-    // private string EmployeeID = string.Empty;
-    // private string EmployeeDepartment = string.Empty;
 
     private SuperEmployee TheEmployee = new SuperEmployee();
 
