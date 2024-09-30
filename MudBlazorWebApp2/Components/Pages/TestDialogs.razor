@@ -3,10 +3,25 @@
 @using MudBlazorWebApp2.Models
 @using System.Diagnostics
 
-
 @inject IDialogService DialogService
 
 
+
+<MudCard>
+    <MudCardContent>
+        <MudText>Testing Dialog Data</MudText>
+        <MudText Typo="Typo.body2">This is just a quick test to validate that I can get complex objects back from a dialog.</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary">https://github.com/markgriep/MudBlazorDialogTest</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+
+
+
+@*  Simple dialog data transfer - Just a Okay or cancel comes back *@
 <MudPaper Class="mt-5 pa-9">
 
     <MudButton @onclick="OpenSimpleDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
@@ -17,6 +32,8 @@
 
  </MudPaper>
 
+
+@*  Simple dialog data transfer - Just a STRING, and Okay or cancel comes back *@
 <MudPaper Class="mt-5 pa-9">
 
     <MudButton @onclick="OpenStringDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
@@ -28,6 +45,7 @@
 </MudPaper>
 
 
+@*  Simple dialog data transfer - Just some strings in an object, also, Okay or cancel comes back *@
 <MudPaper Class="mt-5 pa-9">
 
     <MudButton @onclick="OpenComplexDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
@@ -44,7 +62,7 @@
 </MudPaper>
 
 
-
+@*  This is a more complicated dialog data transfer - A complex object comes back String, date, and int. *@
 <MudPaper Class="mt-5 pa-9">
 
     <MudButton @onclick="OpenSuperComplexDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
@@ -63,8 +81,18 @@
 
 
 
+
+
 @code {
     //################################################################################################################################################
+    //################################################################################################################################################
+    //################################################################################################################################################
+    //################################################################################################################################################
+    //################################################################################################################################################
+    //################################################################################################################################################
+    //################################################################################################################################################
+    //################################################################################################################################################
+
     private string SimpleDialogResultMessage { get; set; } = string.Empty;
 
     private string SimpleDialogStringResult { get; set; } = string.Empty;
@@ -75,6 +103,11 @@
     private SuperEmployee _SuperEmployee = new SuperEmployee();
 
 
+
+    /// <summary>
+    /// Complex object  STRING, INT, DATETime
+    /// </summary>
+    /// <returns></returns>
     private async Task OpenSuperComplexDialogAsync()
     {
         var TheDialog = DialogService.Show<SuperComplexEmployeeDialog>("Super Employee");
@@ -86,27 +119,18 @@
         }
         else
         {
-
             _SuperEmployee = DialogResult.Data as SuperEmployee;
             ComplexDialogResult = $"Name: {_SuperEmployee.EmployeeName},    Bday: {_SuperEmployee.EmployeeBirthDate},    EmployeeId: {_SuperEmployee.EmployeeId}";
-            Debug.WriteLine("");
-
-
-
-            // var x = DialogResult.Data as SuperEmployee;
-
-            // _SuperEmployee = x; = DialogResult.Data as SuperEmployee;
-
-            // ComplexDialogResult = $"Name: {_SuperEmployee.EmployeeName},    Bday: {_SuperEmployee.EmployeeBirthDate},    EmployeeId: {_SuperEmployee.EmployeeId}";
-
-
         }
     }
 
 
 
 
-
+    /// <summary>
+    /// Simple but complex object.  Multi string object
+    /// </summary>
+    /// <returns></returns>
     private async Task OpenComplexDialogAsync()
     {
         var TheDialog = DialogService.Show<ComplexEmployeeDialog>("This is a POCO Dialog");
@@ -119,15 +143,18 @@
         else
         {
             ComplexDialogResultEmployee = DialogResult.Data as Employee;
-            ComplexDialogResult = $"Name: {ComplexDialogResultEmployee.Name},    Department: {ComplexDialogResultEmployee.Department},    EmployeeId: {ComplexDialogResultEmployee.EmployeeId}";
+            ComplexDialogResult = $"Name: {ComplexDialogResultEmployee?.Name},    Department: {ComplexDialogResultEmployee?.Department},    EmployeeId: {ComplexDialogResultEmployee?.EmployeeId}";
             Debug.WriteLine("");
 
-           
+
         }
     }
 
 
-
+    /// <summary>
+    /// Just a string comes back
+    /// </summary>
+    /// <returns></returns>
     private async Task OpenStringDialogAsync()
     {
         var TheDialog = DialogService.Show<StringDialog>();
@@ -146,7 +173,10 @@
 
 
 
-
+    /// <summary>
+    /// Just ok or cancel comes back
+    /// </summary>
+    /// <returns></returns>
     private async Task OpenSimpleDialogAsync()
     {
         var TheDialog = DialogService.Show<SimpleDialog>();
