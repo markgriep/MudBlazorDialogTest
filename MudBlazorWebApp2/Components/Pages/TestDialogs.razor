@@ -28,8 +28,6 @@
 </MudPaper>
 
 
-
-
 <MudPaper Class="mt-5 pa-9">
 
     <MudButton @onclick="OpenComplexDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
@@ -47,6 +45,24 @@
 
 
 
+<MudPaper Class="mt-5 pa-9">
+
+    <MudButton @onclick="OpenSuperComplexDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
+        Open _SUPER COMPLEX_ Dialog
+    </MudButton>
+
+    @if (ComplexDialogResultEmployee != null)
+    {
+        <h4>@ComplexDialogResultEmployee.Name</h4>
+        <h4>@ComplexDialogResultEmployee.EmployeeId</h4>
+        <h4>@ComplexDialogResultEmployee.Department</h4>
+    }
+
+</MudPaper>
+
+
+
+
 
 @code {
 
@@ -55,7 +71,30 @@
     private string SimpleDialogStringResult { get; set; } = string.Empty;
 
     private string ComplexDialogResult { get; set; } = string.Empty;
-    private Employee ComplexDialogResultEmployee = new Employee(); 
+    private Employee ComplexDialogResultEmployee = new Employee();
+
+
+
+
+    private async Task OpenSuperComplexDialogAsync()
+    {
+        var TheDialog = DialogService.Show<ComplexEmployeeDialog>("This is a POCO Dialog");
+        var DialogResult = await TheDialog.Result;
+
+        if (DialogResult.Canceled)
+        {
+            ComplexDialogResult = "Dialog was cancellllllled.";
+        }
+        else
+        {
+            ComplexDialogResultEmployee = DialogResult.Data as Employee;
+            ComplexDialogResult = $"Name: {ComplexDialogResultEmployee.Name},    Department: {ComplexDialogResultEmployee.Department},    EmployeeId: {ComplexDialogResultEmployee.EmployeeId}";
+            Debug.WriteLine("");
+
+
+        }
+    }
+
 
 
 
