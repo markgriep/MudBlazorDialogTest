@@ -1,0 +1,38 @@
+﻿@using MudBlazor
+@using MudBlazorWebApp2.Models
+
+
+
+<MudDialog>
+    
+    <DialogContent>
+        <MudTextField @bind-Value="TheEmployee.Name" Label="Name" />
+        <MudTextField @bind-Value="TheEmployee.Department" Label="Dept" />
+        <MudTextField @bind-Value="TheEmployee.EmployeeId" Label="Employee#" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="OnCancel">Cancel</MudButton>
+        <MudButton OnClick="OnSubmit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+
+
+
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+
+    private string EmployeeName = string.Empty;
+    private string EmployeeID = string.Empty;
+    private string EmployeeDepartment = string.Empty;
+    private Employee TheEmployee = new Employee();
+
+
+    private void OnSubmit() => MudDialog.Close(DialogResult.Ok(TheEmployee));
+
+    private void OnCancel() => MudDialog.Cancel();
+}
+

@@ -1,5 +1,7 @@
 ﻿@page "/"
 @using MudBlazorWebApp2.Dialogs
+@using MudBlazorWebApp2.Models
+@using System.Diagnostics
 
 
 @inject IDialogService DialogService
@@ -33,9 +35,14 @@
     <MudButton @onclick="OpenComplexDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
         Open _POCO_ Dialog
     </MudButton>
-
-    <h4>@ComplexDialogResult</h4>
-
+   
+    @if (ComplexDialogResultEmployee != null)
+    {
+        <h4>@ComplexDialogResultEmployee.Name</h4>
+        <h4>@ComplexDialogResultEmployee.EmployeeId</h4>
+        <h4>@ComplexDialogResultEmployee.Department</h4>
+    }
+    
 </MudPaper>
 
 
@@ -44,17 +51,18 @@
 @code {
 
     private string SimpleDialogResultMessage { get; set; } = string.Empty;
-    
+
     private string SimpleDialogStringResult { get; set; } = string.Empty;
 
     private string ComplexDialogResult { get; set; } = string.Empty;
+    private Employee ComplexDialogResultEmployee = new Employee(); 
 
 
 
 
     private async Task OpenComplexDialogAsync()
     {
-        var TheDialog = DialogService.Show<ComplexDialog>("This is a POCO Dialog");
+        var TheDialog = DialogService.Show<ComplexEmployeeDialog>("This is a POCO Dialog");
         var DialogResult = await TheDialog.Result;
 
         if (DialogResult.Canceled)
@@ -63,8 +71,11 @@
         }
         else
         {
-            
-            ComplexDialogResult = $"You entered: {DialogResult.Data?.ToString()}";
+            ComplexDialogResultEmployee = DialogResult.Data as Employee;
+            ComplexDialogResult = $"Name: {ComplexDialogResultEmployee.Name},    Department: {ComplexDialogResultEmployee.Department},    EmployeeId: {ComplexDialogResultEmployee.EmployeeId}";
+            Debug.WriteLine("");
+
+           
         }
     }
 
