@@ -1,0 +1,46 @@
+﻿@using MudBlazor
+@using MudBlazorWebApp2.Models
+
+<MudDialog>
+    <TitleContent>
+        Add Classic Car
+    </TitleContent>
+
+    <DialogContent>
+        <MudForm @ref="foo" Model="ClassicCar">
+            <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="ClassicCar.OwnerName" Label="Owner Name" For="@(() => ClassicCar.OwnerName)" Required="true" />
+            <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="ClassicCar.Make" Label="Make" For="@(() => ClassicCar.Make)" Required="true" />
+            <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="ClassicCar.Model" Label="Model" For="@(() => ClassicCar.Model)" Required="true" />
+            <MudNumericField Variant="Variant.Outlined" Clearable="true" @bind-Value="ClassicCar.Year" Label="Year" For="@(() => ClassicCar.Year)" Required="true" />
+            <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="ClassicCar.Description" Label="Description" For="@(() => ClassicCar.Description)" Lines="10" />
+        </MudForm>
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton OnClick="OnSubmit" Color="Color.Primary">OK</MudButton>
+        <MudButton OnClick="OnCancel" Color="Color.Secondary">Cancel</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    private MudForm foo;
+    private Car ClassicCar = new Car();
+
+    private void OnSubmit()
+    {
+        // Ensure that `foo` is not null before validating
+        if (foo != null)
+        {
+            foo.Validate();
+            if (foo.IsValid)
+            {
+                MudDialog.Close(DialogResult.Ok(ClassicCar));
+            }
+        }
+    }
+
+    private void OnCancel() => MudDialog.Cancel();
+}

@@ -4,15 +4,21 @@
 <MudDialog>
 
     <DialogContent>
+
+        @*----- Field 1  -----*@
         <MudTextField @bind-Value="TheEmployee.EmployeeName" Label="Name" />
       
+        @*----- Field 2 -----*@
         <MudDatePicker 
             @bind-Date="TheEmployee.EmployeeBirthDate"
             Editable="true"
             Label="Department Join Date"
             ShowToolbar="false" />
 
+        @*----- Field 3 -----*@
         <MudTextField @bind-Value="TheEmployee.EmployeeId" Label="Employee#" />
+
+
     </DialogContent>
 
     <DialogActions>

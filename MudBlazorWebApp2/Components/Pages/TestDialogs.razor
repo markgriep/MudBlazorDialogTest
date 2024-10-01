@@ -81,6 +81,28 @@
 
 
 
+@*  This one has validation with a complicated dialog data transfer  *@
+<MudPaper Class="mt-5 pa-9">
+
+    <MudButton @onclick="OpenCarDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
+        Open Car Dialog
+    </MudButton>
+
+    @if (ComplexDialogResultEmployee != null)
+    {
+        <h4>@_ClassicCar.Year </h4>
+        <h4>@_ClassicCar.Make </h4>
+        <h4>@_ClassicCar.Model </h4>
+        <h4>@_ClassicCar.OwnerName </h4>
+        <h4>@_ClassicCar.Description </h4>
+    } 
+
+</MudPaper>
+
+
+
+
+
 
 
 @code {
@@ -101,6 +123,37 @@
     private Employee ComplexDialogResultEmployee = new Employee();
 
     private SuperEmployee _SuperEmployee = new SuperEmployee();
+    
+    private Car _ClassicCar = new Car();
+
+
+
+
+    /// <summary>
+    /// CAR complex object that supposedly has validation baked in
+    /// </summary>
+    /// <returns></returns>
+    private async Task OpenCarDialogAsync()
+    {
+        var TheDialog = DialogService.Show<CarDialog>("Classic Car");
+        var DialogResult = await TheDialog.Result;
+
+        if (DialogResult.Canceled)
+        {
+            ComplexDialogResult = "Dialog was cancellllllled.";
+        }
+        else
+        {
+            _ClassicCar = DialogResult.Data as Car;
+            ComplexDialogResult =
+            $"Name: {_ClassicCar?.Year}, Model: {_ClassicCar?.Make}, Name: {_ClassicCar?.Model},    Name: {_ClassicCar?.OwnerName}";
+        }
+    }
+
+
+
+
+
 
 
 
