@@ -9,7 +9,8 @@ namespace MudBlazorWebApp2.Models
         [Required(ErrorMessage = "Owner name is required.")]
         public string? OwnerName { get; set; }
 
-        [Required(ErrorMessage = "Make is required.")]
+        [AllowedValues(new string[] { "AMC", "CHEV", "DOD", "CAD", "HON", "TOY" })]
+        [Required(ErrorMessage = "Make is required and must be certian values...")]
         public string Make { get; set; }
 
         [Required(ErrorMessage = "Model is required.")]
