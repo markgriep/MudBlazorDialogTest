@@ -6,7 +6,12 @@
     <DialogContent>
         <MudTextField @bind-Value="TheEmployee.EmployeeName" Label="Name" />
       
-        <MudDatePicker @bind-Date="TheEmployee.EmployeeBirthDate" Label="Department Join Date" />
+        <MudDatePicker 
+            @bind-Date="TheEmployee.EmployeeBirthDate"
+            Editable="true"
+            Label="Department Join Date"
+            ShowToolbar="false" />
+
         <MudTextField @bind-Value="TheEmployee.EmployeeId" Label="Employee#" />
     </DialogContent>
 

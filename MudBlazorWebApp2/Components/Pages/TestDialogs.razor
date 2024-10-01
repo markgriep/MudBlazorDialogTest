@@ -7,8 +7,8 @@
 
 
 
-<MudCard>
-    <MudCardContent>
+<MudCard Color="Color.Light" Style="background-color: whitesmoke;">
+    <MudCardContent Style="background-color: darkslategray;">
         <MudText>Testing Dialog Data</MudText>
         <MudText Typo="Typo.body2">This is just a quick test to validate that I can get complex objects back from a dialog.</MudText>
     </MudCardContent>
@@ -75,7 +75,7 @@
         <h4>@_SuperEmployee.EmployeeId</h4>
         <h4>@_SuperEmployee.EmployeeBirthDate</h4>
     }
-    <h4>@SimpleDialogStringResult</h4>
+   
 </MudPaper>
 
 
@@ -166,7 +166,7 @@
         }
         else
         {
-            SimpleDialogStringResult = $"You entered: {DialogResult.Data?.ToString()}";
+            SimpleDialogStringResult = $"You Entered: {DialogResult.Data?.ToString()}";
         }
     }
 
