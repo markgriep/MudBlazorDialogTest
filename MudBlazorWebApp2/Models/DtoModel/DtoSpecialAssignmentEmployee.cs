@@ -1,6 +1,6 @@
-﻿using MudBlazorWebApp2.Models;
+﻿using MudBlazorDialogTest.Models;
 
-namespace MudBlazorWebApp2.Models.DtoModels
+namespace MudBlazorDialogTest.Models.DtoModels
 {
     public class DtoSpecialAssignmentEmployee
     {

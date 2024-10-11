@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MudBlazorWebApp2.Models
+namespace MudBlazorDialogTest.Models
 {
 
     public partial class SpecialAssignment
