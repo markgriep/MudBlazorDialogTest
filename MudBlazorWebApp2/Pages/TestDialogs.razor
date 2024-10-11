@@ -1,6 +1,8 @@
-﻿@page "/"
+﻿@page "/standard"
+@using MudBlazor
 @using MudBlazorWebApp2.Dialogs
 @using MudBlazorWebApp2.Models
+@using MudBlazorWebApp2.Models.DtoModels
 @using System.Diagnostics
 
 @inject IDialogService DialogService
@@ -54,9 +56,9 @@
    
     @if (ComplexDialogResultEmployee != null)
     {
-        <h4>@ComplexDialogResultEmployee.Name</h4>
+        <h4>@ComplexDialogResultEmployee.FullName</h4>
         <h4>@ComplexDialogResultEmployee.EmployeeId</h4>
-        <h4>@ComplexDialogResultEmployee.Department</h4>
+        <h4>@ComplexDialogResultEmployee.JobTitle</h4>
     }
     
 </MudPaper>
@@ -196,7 +198,7 @@
         else
         {
             ComplexDialogResultEmployee = DialogResult.Data as Employee;
-            ComplexDialogResult = $"Name: {ComplexDialogResultEmployee?.Name},    Department: {ComplexDialogResultEmployee?.Department},    EmployeeId: {ComplexDialogResultEmployee?.EmployeeId}";
+            ComplexDialogResult = $"Name: {ComplexDialogResultEmployee.FullName},    Department: {ComplexDialogResultEmployee?.Department},    EmployeeId: {ComplexDialogResultEmployee?.EmployeeId}";
             Debug.WriteLine("");
 
 

@@ -1,0 +1,53 @@
+﻿
+@using MudBlazor
+@using MudBlazorWebApp2.Models.DtoModels
+
+
+<MudDialog>
+    <TitleContent>
+        Add a Special Assignment Employee
+    </TitleContent>
+
+    <DialogContent>
+        <MudForm @ref="foo" Model="EmployeeToTransfer">
+
+            <MudFocusTrap>
+                <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="EmployeeToTransfer.SpecialAssignment.EmployeeId" Label="Employee ID" />
+                <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="EmployeeToTransfer.SpecialAssignment.SpecialAssignmentGroup" Label="Assignment Group" />
+            </MudFocusTrap>
+
+        </MudForm>
+    </DialogContent>
+
+
+    <DialogActions>
+        <MudButton OnClick="OnCancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="OnSubmit">Ok</MudButton>
+    </DialogActions>
+
+
+</MudDialog>
+
+
+
+
+
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+
+    private MudForm? foo;
+    private DtoSpecialAssignmentEmployee EmployeeToTransfer = new DtoSpecialAssignmentEmployee();
+
+
+
+    //private DtoSpecialAssignmentWithEmployee newMapping = new DtoSpecialAssignmentWithEmployee();
+
+
+    private void OnSubmit() => MudDialog.Close(DialogResult.Ok(EmployeeToTransfer));
+
+
+    private void OnCancel() => MudDialog.Cancel();
+}

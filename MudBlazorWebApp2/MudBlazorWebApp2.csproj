@@ -10,4 +10,11 @@
   <ItemGroup>
     <PackageReference Include="MudBlazor" Version="7.*" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="wwwroot\images\worker.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

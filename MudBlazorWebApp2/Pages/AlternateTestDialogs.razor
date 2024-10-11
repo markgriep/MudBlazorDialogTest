@@ -1,0 +1,39 @@
+﻿@page "/"
+@using MudBlazor
+@using MudBlazorWebApp2.Dialogs
+@using MudBlazorWebApp2.Models
+@using MudBlazorWebApp2.Models.DtoModels
+@using System.Diagnostics
+
+@inject IDialogService DialogService
+
+
+<MudGrid>
+    <MudItem>
+        <img src="images/worker2.jpg" style="width: 140px; height: auto;" />
+    </MudItem>
+    <MudItem>
+        <MudCard Class="mt-3" Style="background-color: #63625b; color: #ffffff;">
+            <MudCardContent Style="background-color: #b0afa1; color: #ffffff;">
+                <MudText>Testing Dialog Data</MudText>
+                <MudText Typo="Typo.body2">This is an alternate page to get Special Assignment back from a dialog.</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <div style="text-align: center; width: 100%;">
+                    <MudButton Style="color: #ffffff;" Variant="Variant.Text">
+                        https://github.com/markgriep/MudBlazorDialogTest
+                    </MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+
+@code {
+
+    //e3e2d0
+
+
+
+}
