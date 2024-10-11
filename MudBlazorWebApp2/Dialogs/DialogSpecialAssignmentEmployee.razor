@@ -1,5 +1,6 @@
 ﻿@using MudBlazor
 @using MudBlazorDialogTest.Models.DtoModels
+@using MudBlazorDialogTest.Models
 
 
 <MudDialog>
@@ -10,10 +11,8 @@
     <DialogContent>
         <MudForm Model="EmployeeToReturn">
 
-            <MudFocusTrap>
-                <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="EmployeeToReturn.SpecialAssignment.EmployeeId" Label="Employee ID" />
-                <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="EmployeeToReturn.SpecialAssignment.SpecialAssignmentGroup" Label="Assignment Group" />
-            </MudFocusTrap>
+                <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="EmployeeToReturn.EmployeeId" Label="Employee ID" />
+                <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="EmployeeToReturn.AssignmentGroup" Label="Assignment Group (O, N, T)" />
 
         </MudForm>
     </DialogContent>
@@ -36,10 +35,12 @@
 
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
-
-   
+      
 
     private DtoSpecialAssignmentEmployee EmployeeToReturn = new DtoSpecialAssignmentEmployee();
+
+
+
 
     private void OnSubmit() => MudDialog.Close(DialogResult.Ok(EmployeeToReturn));
 
