@@ -1,5 +1,7 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components.Web
 @using MudBlazor
+@using MudBlazorDialogTest
 @using MudBlazorDialogTest.Dialogs
 @using MudBlazorDialogTest.Models
 @using MudBlazorDialogTest.Models.DtoModels
@@ -9,13 +11,14 @@
 
 
 
-<MudCard Color="Color.Light" Style="background-color: whitesmoke;">
-    <MudCardContent Style="background-color: darkslategray;">
+
+<MudCard Class="mt-3" Style="background-color: #63625b; color: #ffffff;">
+    <MudCardContent Style="background-color: #b0afa1; color: #ffffff;">
         <MudText>Testing Dialog Data</MudText>
         <MudText Typo="Typo.body2">This is just a quick test to validate that I can get complex objects back from a dialog.</MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton Variant="Variant.Text" Color="Color.Primary">https://github.com/markgriep/MudBlazorDialogTest</MudButton>
+        <MudButton Variant="Variant.Text" Style="color: #ffffff;">https://github.com/markgriep/MudBlazorDialogTest</MudButton>
     </MudCardActions>
 </MudCard>
 
@@ -26,11 +29,13 @@
 @*  Simple dialog data transfer - Just a Okay or cancel comes back *@
 <MudPaper Class="mt-5 pa-9">
 
-    <MudButton @onclick="OpenSimpleDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
+    <MudButton @onclick="OpenSimpleDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
         Open plain Dialog
     </MudButton>
 
+    <div class="mt-4 ml-4">
     <h4>@SimpleDialogResultMessage</h4>
+    </div>
 
  </MudPaper>
 
@@ -38,11 +43,12 @@
 @*  Simple dialog data transfer - Just a STRING, and Okay or cancel comes back *@
 <MudPaper Class="mt-5 pa-9">
 
-    <MudButton @onclick="OpenStringDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
+    <MudButton @onclick="OpenStringDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
         Open _STRING_ Dialog
     </MudButton>
-
+    <div class="mt-4 ml-4">
     <h4>@SimpleDialogStringResult</h4>
+    </div>
 
 </MudPaper>
 
@@ -56,9 +62,12 @@
    
     @if (ComplexDialogResultEmployee != null)
     {
+        <div class="mt-4 ml-4">
+
         <h4>@ComplexDialogResultEmployee.FullName</h4>
         <h4>@ComplexDialogResultEmployee.EmployeeId</h4>
         <h4>@ComplexDialogResultEmployee.JobTitle</h4>
+        </div>
     }
     
 </MudPaper>
@@ -67,15 +76,17 @@
 @*  This is a more complicated dialog data transfer - A complex object comes back String, date, and int. *@
 <MudPaper Class="mt-5 pa-9">
 
-    <MudButton @onclick="OpenSuperComplexDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
+    <MudButton @onclick="OpenSuperComplexDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
         Open _SUPER COMPLEX_ Dialog
     </MudButton>
 
     @if (ComplexDialogResultEmployee != null)
     {
+            <div class="mt-4 ml-4">
         <h4>@_SuperEmployee.EmployeeName</h4>
         <h4>@_SuperEmployee.EmployeeId</h4>
         <h4>@_SuperEmployee.EmployeeBirthDate</h4>
+        </div>
     }
    
 </MudPaper>
@@ -86,17 +97,19 @@
 @*  This one has validation with a complicated dialog data transfer  *@
 <MudPaper Class="mt-5 pa-9">
 
-    <MudButton @onclick="OpenCarDialogAsync" Variant="Variant.Outlined" Color="Color.Warning">
+    <MudButton @onclick="OpenCarDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
         Open Car Dialog
     </MudButton>
 
     @if (ComplexDialogResultEmployee != null)
     {
+        <div class="mt-4 ml-4">
         <h4>@_ClassicCar.Year </h4>
         <h4>@_ClassicCar.Make </h4>
         <h4>@_ClassicCar.Model </h4>
         <h4>@_ClassicCar.OwnerName </h4>
         <h4>@_ClassicCar.Description </h4>
+        </div>
     } 
 
 </MudPaper>
