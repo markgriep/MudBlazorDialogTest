@@ -6,7 +6,7 @@ using System;
 
 
 
-namespace MudBlazorWebApp2.Models
+namespace MudBlazorDialogTest.Models
 {
     public class SuperEmployee
     {

@@ -1,0 +1,102 @@
+﻿@page "/2"
+@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+@using MudBlazorDialogTest
+@using MudBlazorDialogTest.Dialogs
+@using MudBlazorDialogTest.Models
+@using MudBlazorDialogTest.Models.DtoModels
+@using System.Diagnostics
+
+@inject IDialogService DialogService
+
+
+<MudGrid>
+    <MudItem>
+        <img src="images/worker2.jpg" style="width: 140px; height: auto;" />
+    </MudItem>
+    <MudItem>
+
+        <MudCard Class="mt-3" Style="background-color: #63625b; color: #ffffff;">
+            <MudCardContent Style="background-color: #b0afa1; color: #ffffff;">
+                <MudText>Worker Special Assignment Dialog Testing</MudText>
+                <MudText Typo="Typo.body2">This is an alternate page to get Special Assignment back from a dialog.</MudText>
+            </MudCardContent>
+        
+            <MudCardActions>
+                <div style="text-align: center; width: 100%;">
+                    <MudButton Style="color: #ffffff;" Variant="Variant.Text">
+                        https://github.com/markgriep/MudBlazorDialogTest
+                    </MudButton>
+                </div>
+            </MudCardActions>
+
+        </MudCard>
+
+    </MudItem>
+</MudGrid>
+
+
+@*  Simple dialog data transfer - Just a Okay or cancel comes back *@
+<MudPaper Class="ma-5 pa-5" Style="background-color: #969589">
+
+    <div style="color:aqua; start; width: 100%;">
+        <MudButton 
+            OnClick="OnAddSpecialAssignmentAsync"
+            Style="color: #ffffff;" 
+            Variant="Variant.Filled" 
+            Elevation="14"
+            FullWidth="true" 
+            StartIcon="@Icons.Material.Filled.PersonAddAlt1">
+            Click to open Add Special Assignement
+        </MudButton>
+    </div>
+
+    <h4 class="mt-4">@_whatToShowBelowButton</h4>
+
+</MudPaper>
+
+
+
+@code {
+    private string _whatToShowBelowButton = ".Dialog results will be shown here.";
+
+
+    private async Task OnAddSpecialAssignmentAsync()
+    {
+        LogToTempFile(DateTime.Now.ToString()) ;
+        var SpecialAssignmentDialogBox = DialogService.Show<DialogSpecialAssignmentEmployee>();
+        var DialogResult = await SpecialAssignmentDialogBox.Result;
+
+        if (DialogResult.Canceled)
+        {
+            _whatToShowBelowButton = "Dialog Was Canceled";
+            LogToTempFile($"Dialog was cancelled");
+        }
+        else
+        {
+            var foff = DialogResult.Data as DtoSpecialAssignmentEmployee;
+
+            if(foff != null)
+            {
+                _whatToShowBelowButton = _whatToShowBelowButton = $"Group: {foff.AssignmentGroup},\nEmployeeId: {foff.EmployeeId}";
+
+            }
+
+
+           
+            
+        }
+
+                                                                                                                                                
+    }
+
+     static void LogToTempFile(string logEntry)
+        {
+            const string filePath = @"C:\temp\log.txt";
+            if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 25)
+            {
+                File.WriteAllText(filePath, string.Empty); // Clears the file if over limit
+            }
+            File.AppendAllText(filePath, logEntry + Environment.NewLine); // Writes the log entry
+        }
+}

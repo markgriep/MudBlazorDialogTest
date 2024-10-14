@@ -1,12 +1,12 @@
 ﻿@using MudBlazor
-@using MudBlazorWebApp2.Models
+@using MudBlazorDialogTest.Models
 
 
 
 <MudDialog>
     
     <DialogContent>
-        <MudTextField @bind-Value="TheEmployee.Name" Label="Name" />
+        <MudTextField @bind-Value="TheEmployee.FullName" Label="Name" />
         <MudTextField @bind-Value="TheEmployee.Department" Label="Dept" />
         <MudTextField @bind-Value="TheEmployee.EmployeeId" Label="Employee#" />
     </DialogContent>

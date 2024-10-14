@@ -1,0 +1,48 @@
+﻿@using MudBlazor
+@using MudBlazorDialogTest.Models.DtoModels
+@using MudBlazorDialogTest.Models
+
+
+<MudDialog>
+    <TitleContent>
+        Add a Special Assignment Employee
+    </TitleContent>
+
+    <DialogContent>
+        <MudForm Model="EmployeeToReturn">
+
+                <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="EmployeeToReturn.EmployeeId" Label="Employee ID" />
+                <MudTextField Variant="Variant.Outlined" Clearable="true" @bind-Value="EmployeeToReturn.AssignmentGroup" Label="Assignment Group (O, N, T)" />
+
+        </MudForm>
+    </DialogContent>
+
+
+    <DialogActions>
+        <MudButton OnClick="OnCancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="OnSubmit">Ok</MudButton>
+    </DialogActions>
+
+
+</MudDialog>
+
+
+
+
+
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+      
+
+    private DtoSpecialAssignmentEmployee EmployeeToReturn = new DtoSpecialAssignmentEmployee();
+
+
+
+
+    private void OnSubmit() => MudDialog.Close(DialogResult.Ok(EmployeeToReturn));
+
+    private void OnCancel() => MudDialog.Cancel();
+}

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace MudBlazorWebApp2.Models
+namespace MudBlazorDialogTest.Models
 {
     public class Car
     {

@@ -1,7 +1,7 @@
 using MudBlazor.Services;
-using MudBlazorWebApp2.Components;
+using MudBlazorDialogTest.Components;
 
-namespace MudBlazorWebApp2
+namespace MudBlazorDialogTest
 {
     public class Program
     {

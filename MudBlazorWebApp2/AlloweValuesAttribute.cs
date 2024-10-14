@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace MudBlazorWebApp2
+namespace MudBlazorDialogTest
 {
     public class AllowedValuesAttribute : ValidationAttribute
     {
