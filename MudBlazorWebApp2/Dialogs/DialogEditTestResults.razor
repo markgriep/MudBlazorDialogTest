@@ -1,124 +1,107 @@
 ﻿
-
 @using RandomDrugTest.Core.Models
 @using RandomDrugTest.Core.Models.DtoModels
 @using MudBlazorDialogTest.Models
-
 @using MudBlazor
+@using Microsoft.AspNetCore.Components.Web;
 
 
 
 
 
-<MudDialog>
+<MudDialog @onkeyup="Foo">
     <TitleContent>
         Edit Test Results for Employee
     </TitleContent>
-
 
 
     <DialogContent>
         @* <MudForm Model="_employee"> *@
 
 
+        <div class="d-flex gap-4">
+
+
+            <MudTextField
+            Class="flex-1 d-flex"
+            T="string"
+            Variant="Variant.Filled"
+            ReadOnly="true"
+            Disabled="true"
+            Label="Employee" />
+
+
+            <MudTextField
+            Class="flex-1      d-flex"
+            T="string"
+            Variant="Variant.Filled"
+            ReadOnly="true"
+            Disabled="true"
+            Label="Department" />
 
 
 
+            <MudTextField
+            Class="flex-1 d-flex"
+            T="string"
+            Variant="Variant.Filled"
+            ReadOnly="true"
+            Disabled="true"
+            Label="Test Date" />
 
-                 <div class="d-flex gap-4">
-
-
-                   <MudTextField
-                     Class="flex-1 d-flex"
-                     T="string"
-                    Variant="Variant.Filled"
-                    ReadOnly="true"
-                     Disabled="true"
-                     Label="Employee" />
-
-
-                     <MudTextField
-                     Class="flex-1 d-flex"
-                     T="string"
-                   Variant="Variant.Filled"
-                     ReadOnly="true"
-                     Disabled="true"
-                     Label="Department" />
+        </div>
 
 
 
-                     <MudTextField
-                     Class="flex-1 d-flex"
-                     T="string"
-                     Variant="Variant.Filled"
-                     ReadOnly="true"
-                     Disabled="true"
-                     Label="Test Date" />
+        <div class="d-flex gap-4 mt-9">
+
+            <MudTextField
+            T="string" Variant="Variant.Outlined"
+            Clearable="true"
+            Label="Test Date" />
 
 
-                 </div>
-
-
-
-                <div class="d-flex gap-4 mt-9">
-
-                    <MudTextField  T="string" Variant="Variant.Outlined"
-                    Clearable="true"
-                    Label="Test Date" />
+            <MudTextField
+            T="string" Variant="Variant.Outlined"
+            Clearable="true"
+            Label="Payment Date" />
+        </div>
 
 
 
-            <MudTextField T="string" Variant="Variant.Outlined"
-                          Clearable="true"
-                          Label="Payment Date" />
+        <div class="d-flex gap-4 ">
 
 
-                </div>
+            <MudTextField
+            T="string" Variant="Variant.Outlined"
+            Clearable="true"
+            Label="Exam Time Out" />
 
 
-                <div class="d-flex gap-4 ">
-
-                    <MudTextField T="string" Variant="Variant.Outlined"
-                    Clearable="true"
-
-                    Label="Exam Time Out" />
-
-
-            <MudTextField T="string" Variant="Variant.Outlined"
-                          Clearable="true"
-                          Label="Exam Time In" />
-
-                </div>
+            <MudTextField
+            T="string"
+            Variant="Variant.Outlined"
+            Clearable="true"
+            Label="Exam Time In" />
+        </div>
 
 
+        <MudTextField
+        T="string"
+        Variant="Variant.Outlined"
+        Clearable="true"
+        Label="Exam Results" />
 
 
-                <MudTextField T="string" Variant="Variant.Outlined"
-                Clearable="true"
-
-                Label="Exam Results" />
-
-
-
-
-
-                <MudTextField T="string" Variant="Variant.Outlined"
-                Clearable="true"
-                Label="Comments" />
-
-
-
-
-
-
-
-
-
-
-
+        <MudTextField
+        T="string"
+        Variant="Variant.Outlined"
+        Clearable="true"
+        Label="Comments" />
 
         @* </MudForm> *@
     </DialogContent>
+
 
 
 
@@ -148,8 +131,8 @@
 
 
 
-     [CascadingParameter]
-     private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
 
 
 
@@ -178,6 +161,17 @@
     private void OnCancel() => MudDialog.Cancel();
 
 
+    private void Foo(KeyboardEventArgs e)
+    {
+        if (e.Key == "Escape")
+        {
+            OnCancel();
+        }
+        else if (e.Key == "F2")
+        {
+            OnSubmit();
+        }
+    }
 
 
 }
