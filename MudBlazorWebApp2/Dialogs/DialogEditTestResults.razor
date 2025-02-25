@@ -1,0 +1,183 @@
+﻿
+
+@using RandomDrugTest.Core.Models
+@using RandomDrugTest.Core.Models.DtoModels
+@using MudBlazorDialogTest.Models
+
+@using MudBlazor
+
+
+
+
+
+<MudDialog>
+    <TitleContent>
+        Edit Test Results for Employee
+    </TitleContent>
+
+
+
+    <DialogContent>
+        @* <MudForm Model="_employee"> *@
+
+
+
+
+
+
+                 <div class="d-flex gap-4">
+
+
+                   <MudTextField
+                     Class="flex-1 d-flex"
+                     T="string"
+                    Variant="Variant.Filled"
+                    ReadOnly="true"
+                     Disabled="true"
+                     Label="Employee" />
+
+
+                     <MudTextField
+                     Class="flex-1 d-flex"
+                     T="string"
+                   Variant="Variant.Filled"
+                     ReadOnly="true"
+                     Disabled="true"
+                     Label="Department" />
+
+
+
+                     <MudTextField
+                     Class="flex-1 d-flex"
+                     T="string"
+                     Variant="Variant.Filled"
+                     ReadOnly="true"
+                     Disabled="true"
+                     Label="Test Date" />
+
+
+                 </div>
+
+
+
+                <div class="d-flex gap-4 mt-9">
+
+                    <MudTextField  T="string" Variant="Variant.Outlined"
+                    Clearable="true"
+                    Label="Test Date" />
+
+
+
+            <MudTextField T="string" Variant="Variant.Outlined"
+                          Clearable="true"
+                          Label="Payment Date" />
+
+
+                </div>
+
+
+                <div class="d-flex gap-4 ">
+
+                    <MudTextField T="string" Variant="Variant.Outlined"
+                    Clearable="true"
+
+                    Label="Exam Time Out" />
+
+
+            <MudTextField T="string" Variant="Variant.Outlined"
+                          Clearable="true"
+                          Label="Exam Time In" />
+
+                </div>
+
+
+
+
+                <MudTextField T="string" Variant="Variant.Outlined"
+                Clearable="true"
+
+                Label="Exam Results" />
+
+
+
+
+
+                <MudTextField T="string" Variant="Variant.Outlined"
+                Clearable="true"
+                Label="Comments" />
+
+
+
+
+
+
+
+
+
+
+
+
+        @* </MudForm> *@
+    </DialogContent>
+
+
+
+    <DialogActions>
+
+        <MudButton OnClick="OnCancel"
+        Size="Size.Small"
+        Variant="Variant.Outlined">
+            Cancel <span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(esc)</span></MudButton>
+
+        <MudButton OnClick="OnCancel"
+        Color="Color.Primary"
+        Size="Size.Small"
+        Variant="Variant.Outlined">
+
+            Ok<span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(F2)</span></MudButton>
+
+    </DialogActions>
+
+</MudDialog>
+
+
+
+
+
+@code {
+
+
+
+     [CascadingParameter]
+     private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+
+
+
+    //private DtoEditTestResultsEmployee EmployeeToEdit = new();
+
+
+    // private backing field for employee selection
+    private SelectedForTesting _employee = new();
+
+
+
+    // private DtoJobCodeToDepartmentMapping newMapping = new DtoJobCodeToDepartmentMapping();
+    // protected override void OnInitialized()
+    // {
+
+    //     var x = 123;
+    //     newMapping ??= new DtoJobCodeToDepartmentMapping();
+    //     MudDialog.SetTitle($" {"bar"} some kind of TITLE!!! ?!?!?!?");
+    // }
+
+
+
+
+    private void OnSubmit() => MudDialog.Close(DialogResult.Ok(_employee));
+
+    private void OnCancel() => MudDialog.Cancel();
+
+
+
+
+}

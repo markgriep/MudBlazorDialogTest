@@ -26,6 +26,34 @@
 
 
 
+
+
+
+
+@*  Employee test results *@
+<MudPaper Class="mt-5 pa-9">
+
+    <MudButton @onclick="OpenEditEmployeeTestResults" Variant="Variant.Filled" Color="Color.Surface">
+        Open the Edit Employee Test Results Dialog
+    </MudButton>
+
+    <div class="mt-4 ml-4">
+        <h4>@SimpleDialogResultMessage</h4>
+    </div>
+
+</MudPaper>
+
+
+
+
+
+
+
+
+
+
+
+
 @*  Simple dialog data transfer - Just a Okay or cancel comes back *@
 <MudPaper Class="mt-5 pa-9">
 
@@ -34,10 +62,29 @@
     </MudButton>
 
     <div class="mt-4 ml-4">
-    <h4>@SimpleDialogResultMessage</h4>
+        <h4>@SimpleDialogResultMessage</h4>
     </div>
 
- </MudPaper>
+</MudPaper>
+
+
+
+
+
+
+
+@*  Simple dialog data transfer - Just a Okay or cancel comes back *@
+<MudPaper Class="mt-5 pa-9">
+
+    <MudButton @onclick="OpenSimpleDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
+        Open plain Dialog
+    </MudButton>
+
+    <div class="mt-4 ml-4">
+        <h4>@SimpleDialogResultMessage</h4>
+    </div>
+
+</MudPaper>
 
 
 @*  Simple dialog data transfer - Just a STRING, and Okay or cancel comes back *@
@@ -47,7 +94,7 @@
         Open _STRING_ Dialog
     </MudButton>
     <div class="mt-4 ml-4">
-    <h4>@SimpleDialogStringResult</h4>
+        <h4>@SimpleDialogStringResult</h4>
     </div>
 
 </MudPaper>
@@ -59,17 +106,17 @@
     <MudButton @onclick="OpenComplexDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
         Open _POCO_ Dialog
     </MudButton>
-   
+
     @if (ComplexDialogResultEmployee != null)
     {
         <div class="mt-4 ml-4">
 
-        <h4>@ComplexDialogResultEmployee.FullName</h4>
-        <h4>@ComplexDialogResultEmployee.EmployeeId</h4>
-        <h4>@ComplexDialogResultEmployee.JobTitle</h4>
+            <h4>@ComplexDialogResultEmployee.FullName</h4>
+            <h4>@ComplexDialogResultEmployee.EmployeeId</h4>
+            <h4>@ComplexDialogResultEmployee.JobTitle</h4>
         </div>
     }
-    
+
 </MudPaper>
 
 
@@ -82,13 +129,13 @@
 
     @if (ComplexDialogResultEmployee != null)
     {
-            <div class="mt-4 ml-4">
-        <h4>@_SuperEmployee.EmployeeName</h4>
-        <h4>@_SuperEmployee.EmployeeId</h4>
-        <h4>@_SuperEmployee.EmployeeBirthDate</h4>
+        <div class="mt-4 ml-4">
+            <h4>@_SuperEmployee.EmployeeName</h4>
+            <h4>@_SuperEmployee.EmployeeId</h4>
+            <h4>@_SuperEmployee.EmployeeBirthDate</h4>
         </div>
     }
-   
+
 </MudPaper>
 
 
@@ -104,13 +151,13 @@
     @if (ComplexDialogResultEmployee != null)
     {
         <div class="mt-4 ml-4">
-        <h4>@_ClassicCar.Year </h4>
-        <h4>@_ClassicCar.Make </h4>
-        <h4>@_ClassicCar.Model </h4>
-        <h4>@_ClassicCar.OwnerName </h4>
-        <h4>@_ClassicCar.Description </h4>
+            <h4>@_ClassicCar.Year </h4>
+            <h4>@_ClassicCar.Make </h4>
+            <h4>@_ClassicCar.Model </h4>
+            <h4>@_ClassicCar.OwnerName </h4>
+            <h4>@_ClassicCar.Description </h4>
         </div>
-    } 
+    }
 
 </MudPaper>
 
@@ -138,8 +185,50 @@
     private Employee ComplexDialogResultEmployee = new Employee();
 
     private SuperEmployee _SuperEmployee = new SuperEmployee();
-    
+
     private Car _ClassicCar = new Car();
+
+    private SelectedForTesting employeeResults = new();
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// CAR complex object that supposedly has validation baked in
+    /// </summary>
+    /// <returns></returns>
+    private async Task OpenEditEmployeeTestResults()
+    {
+        var TheDialog = DialogService.Show<DialogEditTestResults>("Employee Test Rsults");
+        var DialogResult = await TheDialog.Result;
+
+        if (DialogResult.Canceled)
+        {
+            ComplexDialogResult = "Dialog was cancellllllled.";
+        }
+        else
+        {
+
+            // var fi = DialogResult.Data as SelectedForTesting;
+            // employeeResults.TestDate = fi.TestDate;
+            // employeeResults.ExamTimeIn = fi.ExamTimeIn;
+            // employeeResults.ExamTimeOut = fi.ExamTimeOut;
+            // employeeResults.ExamResults = fi.ExamResults;
+            // employeeResults.Comments = fi.Comments;
+
+
+            // _ClassicCar = DialogResult.Data as Car;
+            // ComplexDialogResult =
+            // $"Name: {_ClassicCar?.Year}, Model: {_ClassicCar?.Make}, Name: {_ClassicCar?.Model},    Name: {_ClassicCar?.OwnerName}";
+        }
+    }
+
+
+
 
 
 
