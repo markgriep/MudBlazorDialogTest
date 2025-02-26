@@ -9,7 +9,7 @@
 
 
 
-<MudDialog @onkeyup="Foo">
+<MudDialog @onkeyup="KeyHandler">
     <TitleContent>
         Edit Test Results for Employee
     </TitleContent>
@@ -19,6 +19,7 @@
         <MudForm Model="_employee">
 
 
+                                            @*  Show read only employee data*@
             <div class="d-flex gap-4">
 
                 <MudTextField
@@ -45,6 +46,7 @@
 
 
 
+                                            @* Show read only employee data*@
             <div class="d-flex gap-4 mt-3">
 
                 <MudTextField
@@ -60,48 +62,39 @@
 
 
 
-
+                                             @* Both dates Testing date, payment date. *@
             <div class="d-flex gap-4 mt-9">
-
-
-
-
 
 
                 <MudDatePicker
                     PickerVariant="PickerVariant.Dialog"
                     ShowToolbar="false"
-                T="DateTime?"
-                Adornment="Adornment.Start"
-                AdornmentIcon="@Icons.Material.Filled.CalendarToday"
-                AdornmentColor="Color.Success"
-                Variant="Variant.Outlined"
-                Clearable="true"
-                Label="Test Date"
-                @bind-Date="_employee.TestDate" />
+                    T="DateTime?"
+                    Adornment="Adornment.Start"
+                    AdornmentIcon="@Icons.Material.Filled.CalendarToday"
+                    AdornmentColor="Color.Success"
+                    Variant="Variant.Outlined"
+                    Clearable="true"
+                    Label="Test Date"
+                    @bind-Date="_employee.TestDate" />
 
 
-                <MudDatePicker PickerVariant="PickerVariant.Dialog"
-                               ShowToolbar="false"
-                               T="DateTime?" Variant="Variant.Outlined"
-                Adornment="Adornment.Start"
-                AdornmentIcon="@Icons.Material.Filled.CalendarToday"
-                AdornmentColor="Color.Primary"
-                Clearable="true"
-                Label="Payment Date" @bind-Date="_employee.PaymentDate" />
-
-
-
-
-
+                <MudDatePicker
+                    PickerVariant="PickerVariant.Dialog"
+                    ShowToolbar="false"
+                    T="DateTime?" Variant="Variant.Outlined"
+                    Adornment="Adornment.Start"
+                    AdornmentIcon="@Icons.Material.Filled.CalendarToday"
+                    AdornmentColor="Color.Primary"
+                    Clearable="true"
+                    Label="Payment Date" @bind-Date="_employee.PaymentDate" />
 
             </div>
 
-            @*==============================================================================================================*@
-            @*==============================================================================================================*@
-            @*==============================================================================================================*@
-            @*==============================================================================================================*@
 
+
+
+                                            @* Time in/out. When employee was SENT and Got to clinic *@
             <div class="d-flex gap-4 ">
 
                 <MudTimePicker
@@ -122,24 +115,35 @@
             </div>
 
 
-            <MudTextField
-            T="string"
-            Variant="Variant.Outlined"
-            Clearable="true"
-            Label="Exam Results"
-            @bind-Value="_employee.ExamResults" />
+
+                                             @* Results (pass/fail) *@
+            <div class="d-flex gap-4 ">
+
+                <MudTextField
+                    T="string"
+                    Variant="Variant.Outlined"
+                    Clearable="true"
+                    Label="Exam Results"
+                    @bind-Value="_employee.ExamResults" />
+
+            </div>
 
 
-            <MudTextField
-            T="string"
-            Variant="Variant.Outlined"
-            Clearable="true"
-            Label="Comments"
-            @bind-Value="_employee.Comments" />
+
+                                            @* Place for comments *@
+            <div class="d-flex gap-4 ">
+
+                <MudTextField
+                    T="string"
+                    Variant="Variant.Outlined"
+                    Clearable="true"
+                    Label="Comments"
+                    @bind-Value="_employee.Comments" />
+
+            </div>
+
 
         </MudForm>
-
-
 
     </DialogContent>
 
@@ -199,7 +203,7 @@
 
 
     // This handles keyboard shortcuts
-    private void Foo(KeyboardEventArgs e)
+    private void KeyHandler(KeyboardEventArgs e)
     {
 
 

@@ -201,13 +201,14 @@
 
 
     /// <summary>
-    ///
+    /// Prototype for getting/holding results of a person's random drug test via dialog.
     /// </summary>
     /// <returns></returns>
     private async Task OpenEditEmployeeTestResults()
     {
 
-        // mock up an employee
+        // mock up an employee with some data to simulate
+        // data coming from the DB
         SelectedForTesting _employeeUnderTest = new()
         {
             Id = 555123999,
@@ -246,8 +247,11 @@
             EmployeeDialogResultMessage = "Dialog was canceled.";
 
         }
+
         else
         {
+
+            // holder of results from dialog
             var dataFromDialog = DialogResult.Data as SelectedForTesting;
 
             EmployeeDialogResultMessage =
@@ -255,6 +259,7 @@
 
 
 
+            // Setup a UI to show what the dialog results were.
             SnackbarService.Clear();
             SnackbarService.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
             SnackbarService.Add
@@ -262,6 +267,7 @@
                 @<div>
                     <h3>Results from dialog</h3>
                     <ul>
+                        <li>        ID: <em>    @dataFromDialog?.Id</em></li>
                         <li>      Name: <strong>@dataFromDialog?.EmployeeName</strong></li>
                         <li>     Title: <strong>@dataFromDialog?.JobTitle</strong></li>
                         <li>Department: <strong>@dataFromDialog?.Department</strong></li>
@@ -274,8 +280,8 @@
 
                     </ul>
                 </div>
-
-    , Severity.Warning);
+                , Severity.Warning
+            );
         }
     }
 
