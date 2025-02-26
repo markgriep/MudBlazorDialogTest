@@ -25,11 +25,11 @@
 
         public DateTime? TestDate { get; set; }
 
-        public string? ExamTimeInString { get; set; }
+        //public string? ExamTimeInString { get; set; }
 
         public DateTime? ExamTimeIn { get; set; }
 
-        public string? ExamTimeOutString { get; set; }
+        //public string? ExamTimeOutString { get; set; }
 
         public DateTime? ExamTimeOut { get; set; }
 

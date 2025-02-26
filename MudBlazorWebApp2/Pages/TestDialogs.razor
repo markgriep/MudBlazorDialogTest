@@ -8,6 +8,7 @@
 @using System.Diagnostics
 
 @inject IDialogService DialogService
+@inject ISnackbar SnackbarService
 
 
 
@@ -38,7 +39,7 @@
     </MudButton>
 
     <div class="mt-4 ml-4">
-        <h4>@SimpleDialogResultMessage</h4>
+        <h4>@EmployeeDialogResultMessage</h4>
     </div>
 
 </MudPaper>
@@ -179,6 +180,8 @@
 
     private string SimpleDialogResultMessage { get; set; } = string.Empty;
 
+    private string EmployeeDialogResultMessage { get; set; } = "starting...";
+
     private string SimpleDialogStringResult { get; set; } = string.Empty;
 
     private string ComplexDialogResult { get; set; } = string.Empty;
@@ -198,32 +201,72 @@
 
 
     /// <summary>
-    /// CAR complex object that supposedly has validation baked in
+    ///
     /// </summary>
     /// <returns></returns>
     private async Task OpenEditEmployeeTestResults()
     {
-        var TheDialog = DialogService.Show<DialogEditTestResults>("Employee Test Rsults");
+
+        // mock up an employee
+        SelectedForTesting _employeeUnderTest = new()
+        {
+            Id = 555123999,
+            EmployeeName= "John Dough",
+            JobTitle="Ship's first mate second class IVI",
+            Department = "999"
+        };
+
+        // Setup a parameters "dictionary"
+        var parameters = new DialogParameters
+        {
+            {"employee", _employeeUnderTest}
+        };
+
+
+        // Spin up and show a dialog, passing the params to it.    - title to show -      -the params-
+        var TheDialog = DialogService.Show<DialogEditTestResults>("Employee Test Rsults", parameters);
+
+
+
+        // pause and wait for the results to come back
         var DialogResult = await TheDialog.Result;
 
+        // handle different options that come back from the dialog
         if (DialogResult.Canceled)
         {
-            ComplexDialogResult = "Dialog was cancellllllled.";
+            EmployeeDialogResultMessage = "Dialog was canceled.";
+
         }
         else
         {
+            var dataFromDialog = DialogResult.Data as SelectedForTesting;
 
-            // var fi = DialogResult.Data as SelectedForTesting;
-            // employeeResults.TestDate = fi.TestDate;
-            // employeeResults.ExamTimeIn = fi.ExamTimeIn;
-            // employeeResults.ExamTimeOut = fi.ExamTimeOut;
-            // employeeResults.ExamResults = fi.ExamResults;
-            // employeeResults.Comments = fi.Comments;
+            EmployeeDialogResultMessage =
+            $"Comments: {dataFromDialog?.Comments} --------- Results: {dataFromDialog?.ExamResults}";
 
 
-            // _ClassicCar = DialogResult.Data as Car;
-            // ComplexDialogResult =
-            // $"Name: {_ClassicCar?.Year}, Model: {_ClassicCar?.Make}, Name: {_ClassicCar?.Model},    Name: {_ClassicCar?.OwnerName}";
+
+            SnackbarService.Clear();
+            SnackbarService.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+            SnackbarService.Add
+            (
+                @<div>
+                    <h3>Results from dialog</h3>
+                    <ul>
+                        <li>      Name: <strong>@dataFromDialog?.EmployeeName</strong></li>
+                        <li>     Title: <strong>@dataFromDialog?.JobTitle</strong></li>
+                        <li>Department: <strong>@dataFromDialog?.Department</strong></li>
+                        <li>  TestDate: <strong>@dataFromDialog?.TestDate</strong></li>
+                        <li>   Time In: <strong>@dataFromDialog?.ExamTimeIn</strong></li>
+                        <li>   TimeOut: <strong>@dataFromDialog?.ExamTimeOut</strong></li>
+                        <li>    Result: <strong>@dataFromDialog?.ExamResults</strong></li>
+                        <li>   Paid on: <strong>@dataFromDialog?.PaymentDate</strong></li>
+                        <li>  Comments: <strong>@dataFromDialog?.Comments</strong></li>
+
+                    </ul>
+                </div>
+
+    , Severity.Warning);
         }
     }
 
