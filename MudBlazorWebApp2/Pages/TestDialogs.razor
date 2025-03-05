@@ -18,7 +18,21 @@
         <MudText Typo="Typo.body2">This is just a quick test to validate that I can get complex objects back from a dialog.</MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton Variant="Variant.Text" Style="color: #ffffff;">https://github.com/markgriep/MudBlazorDialogTest</MudButton>
+        <MudButton Variant="Variant.Text" Style="color: #eeeedd">https://github.com/markgriep/MudBlazorDialogTest</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+
+
+
+<MudCard Class="mt-3" >
+    <MudCardContent >
+        <MudText>Testing Dialog Data Two</MudText>
+        <MudText Typo="Typo.body2">This is just another quick test to validate that I can get complex objects back from a dialog.</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" >https://github.com/markgriep/MudBlazorDialogTest</MudButton>
     </MudCardActions>
 </MudCard>
 
@@ -59,7 +73,7 @@
     <MudButton @onclick="OpenComplexDialogAsync" Variant="Variant.Filled" Color="Color.Surface">
         Open _POCO_ Dialog
     </MudButton>
-   
+
     @if (ComplexDialogResultEmployee != null)
     {
         <div class="mt-4 ml-4">
@@ -69,7 +83,7 @@
         <h4>@ComplexDialogResultEmployee.JobTitle</h4>
         </div>
     }
-    
+
 </MudPaper>
 
 
@@ -88,7 +102,7 @@
         <h4>@_SuperEmployee.EmployeeBirthDate</h4>
         </div>
     }
-   
+
 </MudPaper>
 
 
@@ -110,7 +124,7 @@
         <h4>@_ClassicCar.OwnerName </h4>
         <h4>@_ClassicCar.Description </h4>
         </div>
-    } 
+    }
 
 </MudPaper>
 
@@ -138,7 +152,7 @@
     private Employee ComplexDialogResultEmployee = new Employee();
 
     private SuperEmployee _SuperEmployee = new SuperEmployee();
-    
+
     private Car _ClassicCar = new Car();
 
 
