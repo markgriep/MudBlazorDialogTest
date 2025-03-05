@@ -1,0 +1,231 @@
+﻿
+@using RandomDrugTest.Core.Models
+@using RandomDrugTest.Core.Models.DtoModels
+@using MudBlazorDialogTest.Models
+@using MudBlazor
+@using Microsoft.AspNetCore.Components.Web;
+
+
+
+
+
+<MudDialog @onkeyup="KeyHandler">
+    <TitleContent>
+        Edit Test Results for Employee
+    </TitleContent>
+
+
+    <DialogContent>
+        <MudForm Model="_employee">
+
+
+                                            @*  Show read only employee data*@
+            <div class="d-flex gap-4">
+
+                <MudTextField
+                Class="flex-1 d-flex"
+                T="string"
+                Variant="Variant.Filled"
+                ReadOnly="true"
+                Disabled="true"
+                Label="Employee"
+                @bind-Value="_employee.EmployeeName" />
+
+                <MudTextField
+                Class="flex-1 d-flex"
+                T="string"
+                Variant="Variant.Filled"
+                ReadOnly="true"
+                Disabled="true"
+                Label="Department"
+                @bind-Value="_employee.Department" />
+
+            </div>
+
+
+
+
+
+                                            @* Show read only employee data*@
+            <div class="d-flex gap-4 mt-3">
+
+                <MudTextField
+                Class="flex-1 d-flex"
+                T="string"
+                Variant="Variant.Filled"
+                ReadOnly="true"
+                Disabled="true"
+                Label="Title"
+                @bind-Value="_employee.JobTitle" />
+
+            </div>
+
+
+
+                                             @* Both dates Testing date, payment date. *@
+            <div class="d-flex gap-4 mt-9">
+
+
+                <MudDatePicker
+                    PickerVariant="PickerVariant.Dialog"
+                    ShowToolbar="false"
+                    T="DateTime?"
+                    Adornment="Adornment.Start"
+                    AdornmentIcon="@Icons.Material.Filled.CalendarToday"
+                    AdornmentColor="Color.Success"
+                    Variant="Variant.Outlined"
+                    Clearable="true"
+                    Label="Test Date"
+                    @bind-Date="_employee.TestDate" />
+
+
+                <MudDatePicker
+                    PickerVariant="PickerVariant.Dialog"
+                    ShowToolbar="false"
+                    T="DateTime?" Variant="Variant.Outlined"
+                    Adornment="Adornment.Start"
+                    AdornmentIcon="@Icons.Material.Filled.CalendarToday"
+                    AdornmentColor="Color.Primary"
+                    Clearable="true"
+                    Label="Payment Date" @bind-Date="_employee.PaymentDate" />
+
+            </div>
+
+
+
+
+                                            @* Time in/out. When employee was SENT and Got to clinic *@
+            <div class="d-flex gap-4 ">
+
+                <MudTimePicker
+                        PickerVariant="PickerVariant.Dialog"
+                        Variant="Variant.Outlined"
+                        T="TimeSpan?"
+                        Label="Exam Time In"
+                        @bind-Time="_employee.ExamTimeIn" />
+
+
+                <MudTimePicker
+                        PickerVariant="PickerVariant.Dialog"
+                        Variant="Variant.Outlined"
+                        T="TimeSpan?"
+                        Label="Exam Time Out"
+                        @bind-Time="_employee.ExamTimeOut" />
+
+            </div>
+
+
+
+                                             @* Results (pass/fail) *@
+            <div class="d-flex gap-4 ">
+
+                <MudTextField
+                    T="string"
+                    Variant="Variant.Outlined"
+                    Clearable="true"
+                    Label="Exam Results"
+                    @bind-Value="_employee.ExamResults" />
+
+            </div>
+
+
+
+                                            @* Place for comments *@
+            <div class="d-flex gap-4 ">
+
+                <MudTextField
+                    T="string"
+                    Variant="Variant.Outlined"
+                    Clearable="true"
+                    Label="Comments"
+                    @bind-Value="_employee.Comments" />
+
+            </div>
+
+
+        </MudForm>
+
+    </DialogContent>
+
+
+
+
+    <DialogActions>
+        <span style="font-size: 0.8em; font-weight: lighter; color: lightblue; padding-left: 8px;">Record ID: @Employee.Id</span>
+
+        <MudSpacer/>
+        <MudButton OnClick="OnCancel"
+        Size="Size.Small"
+        Variant="Variant.Outlined">
+            Cancel <span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(esc)</span></MudButton>
+
+        <MudButton OnClick="OnSubmit"
+        Color="Color.Primary"
+        Size="Size.Small"
+        Variant="Variant.Outlined">
+
+            Ok<span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(F2)</span></MudButton>
+
+    </DialogActions>
+
+</MudDialog>
+
+
+
+
+
+@code {
+
+
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+
+
+    [Parameter]
+    public SelectedForTesting Employee { get; set; }
+
+
+    private SelectedForTesting _employee;
+
+
+    protected override void OnInitialized()
+    {
+        _employee = Employee;
+    }
+
+
+
+
+
+    private void OnSubmit() => MudDialog.Close(DialogResult.Ok(_employee));
+    private void OnCancel() => MudDialog.Cancel();
+
+
+    // This handles keyboard shortcuts
+    private void KeyHandler(KeyboardEventArgs e)
+    {
+
+
+
+        if (e.Key == "Escape")
+        {
+            OnCancel();
+        }
+        else if (e.Key == "F2")
+        {
+            OnSubmit();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+}
