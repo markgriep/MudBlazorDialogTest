@@ -1,0 +1,119 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+
+@using MudBlazorDialogTest.Models.DtoModels
+@using RandomDrugTest.Core.Models.DtoModels
+@using MudBlazorDialogTest.Models
+
+@using MudBlazor
+
+
+<MudDialog @onkeyup="KeyHandler">
+    <DialogContent>
+        <MudFocusTrap>
+            <MudStack Spacing="4">
+
+                <MudPaper Outlined="true" Elevation="0">
+                    <MudCardContent>
+                        <MudText Typo="Typo.caption">Testing Group</MudText>
+                        <MudRadioGroup @bind-Value="newTestPercentage.TestGroup">
+                            <MudRadio Value="@("T")" Color="Color.Primary">Transit</MudRadio>
+                            <MudRadio Value="@("N")" Color="Color.Secondary">Non-DOT</MudRadio>
+                            <MudRadio Value="@("O")">Other</MudRadio>
+                        </MudRadioGroup>
+                    </MudCardContent>
+                </MudPaper>
+
+                <MudPaper Outlined="true" Elevation="0">
+                    <MudCardContent>
+                        <MudText Typo="Typo.caption">Test Type</MudText>
+                        <MudRadioGroup @bind-Value="newTestPercentage.TestType">
+                            <MudRadio Value="@("A")" Color="Color.Primary">Drug</MudRadio>
+                            <MudRadio Value="@("D")" Color="Color.Secondary">Alcohol</MudRadio>
+                        </MudRadioGroup>
+                    </MudCardContent>
+                </MudPaper>
+
+                <!-- Full-width numeric field with tooltip restored -->
+                <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
+                    <div style="width: 100%;">
+                        <MudNumericField Class="my-3"
+                                         Variant="Variant.Outlined"
+                                         Immediate="true"
+                                         Clearable="true"
+                                         @bind-Value="newTestPercentage.PercentageRequired"
+                                         Label="Percentage Required"
+                                         Min="20"
+                                         Max="65"
+                                         FullWidth="true" />
+                    </div>
+                </MudTooltip>
+
+            </MudStack>
+        </MudFocusTrap>
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton OnClick="OnCancel"
+                   Size="Size.Small"
+                   Variant="Variant.Outlined">
+            Cancel <span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(esc)</span>
+        </MudButton>
+
+        <MudButton Color="Color.Primary"
+                   Size="Size.Small"
+                   Variant="Variant.Outlined"
+                   OnClick="OnSubmit">
+            Ok<span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(F2)</span>
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    // [Parameter]
+    public DtoSelectionPercentage newTestPercentage = new DtoSelectionPercentage();
+
+
+      [CascadingParameter]
+      private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+
+
+
+
+
+
+    protected override void OnInitialized()
+    {
+        //newTestPercentage ??= new DtoSelectionPercentage();
+        MudDialog.SetTitle($"Add New Selection Percentage");
+    }
+
+
+
+
+    private void OnSubmit()
+    {
+
+        MudDialog.Close(DialogResult.Ok(newTestPercentage));
+    }
+
+
+     private void OnCancel() => MudDialog.Cancel();
+
+
+
+
+    private void KeyHandler(KeyboardEventArgs e)
+    {
+        if (e.Key == "F2")
+        {
+            //OnSubmit(); Trigger the OK action
+        }
+        else if (e.Key == "Escape")
+        {
+            //OnCancel(); Trigger the Cancel action
+        }
+    }
+
+
+
+}

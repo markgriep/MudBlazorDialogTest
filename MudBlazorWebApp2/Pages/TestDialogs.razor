@@ -27,30 +27,23 @@
 
 
 
-<MudCard Class="mt-3" >
-    <MudCardContent >
-        <MudText>Testing Dialog Data Two</MudText>
-        <MudText Typo="Typo.body2">This is just another quick test to validate that I can get complex objects back from a dialog.</MudText>
-    </MudCardContent>
-    <MudCardActions>
-        <MudButton Variant="Variant.Text" >https://github.com/markgriep/MudBlazorDialogTest</MudButton>
-    </MudCardActions>
-</MudCard>
 
 
 
 
-<MudCard Class="mt-3" >
-    <MudCardContent >
-        <MudText>Testing Dialog Data</MudText>
-        <MudText Typo="Typo.body2">This is just a quick test to validate that I can get complex objects back from a dialog.</MudText>
-    </MudCardContent>
-    <MudCardActions>
-        <MudButton Variant="Variant.Text" >https://github.com/markgriep/MudBlazorDialogTest</MudButton>
-    </MudCardActions>
-</MudCard>
 
+@*  Selection Percentages *@
+<MudPaper Class="mt-5 pa-9">
 
+    <MudButton @onclick="OpenEditEmployeeTestResults" Variant="Variant.Filled" Color="Color.Surface">
+        Open the Edit Employee Test Results Dialog
+    </MudButton>
+
+    <div class="mt-4 ml-4">
+        <h4>@EmployeeDialogResultMessage</h4>
+    </div>
+
+</MudPaper>
 
 
 
@@ -206,7 +199,7 @@
 
     private string SimpleDialogResultMessage { get; set; } = string.Empty;
 
-    private string EmployeeDialogResultMessage { get; set; } = "starting...";
+    private string EmployeeDialogResultMessage { get; set; } = string.Empty;
 
     private string SimpleDialogStringResult { get; set; } = string.Empty;
 
