@@ -35,7 +35,7 @@
 @*  Selection Percentages *@
 <MudPaper Class="mt-5 pa-9">
 
-    <MudButton @onclick="OpenEditEmployeeTestResults" Variant="Variant.Filled" Color="Color.Surface">
+    <MudButton @onclick="OpenEditSelectionPercentageResults" Variant="Variant.Filled" Color="Color.Surface">
         Open the Edit Selection Percentage
     </MudButton>
 
@@ -201,6 +201,9 @@
 
     private string EmployeeDialogResultMessage { get; set; } = string.Empty;
 
+    private string SelectionPercentageMessage { get; set; } = string.Empty;
+
+
     private string SimpleDialogStringResult { get; set; } = string.Empty;
 
     private string ComplexDialogResult { get; set; } = string.Empty;
@@ -215,6 +218,33 @@
 
 
 
+
+
+
+    private async Task OpenEditSelectionPercentageResults()
+    {
+        SelectionPercentage _selectionPercentage = new()
+            {
+                TestGroup = "GG",
+                TestType = "Alcohol",
+                PercentageRequired = 49
+            };
+
+        var parameters = new DialogParameters
+        {
+            {"selectionPercentage",_selectionPercentage },
+            {"sumthin", "8888" },
+            {"nutthin", "0000" }
+        };
+
+        var thedial = DialogService.Show<DialogAddSelectionPercentage>("first parameter is always title???", parameters);
+
+        var DialogResults = await thedial.Result;
+        if (DialogResults.Canceled)
+        {
+            SelectionPercentageMessage = "Was cancelled.";
+        }
+    }
 
 
 
