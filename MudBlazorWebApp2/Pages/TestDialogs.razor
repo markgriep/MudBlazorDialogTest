@@ -24,14 +24,6 @@
 </MudCard>
 
 
-
-
-
-
-
-
-
-
 @*  Selection Percentages *@
 <MudPaper Class="mt-5 pa-9">
 
@@ -40,14 +32,13 @@
     </MudButton>
 
     <div class="mt-4 ml-4">
-        <h4>@EmployeeDialogResultMessage</h4>
+        <pre>
+
+        <h4>@SelectionPercentageMessage</h4>
+        </pre>
     </div>
 
 </MudPaper>
-
-
-
-
 
 
 @*  Employee test results *@
@@ -64,16 +55,6 @@
 </MudPaper>
 
 
-
-
-
-
-
-
-
-
-
-
 @*  Simple dialog data transfer - Just a Okay or cancel comes back *@
 <MudPaper Class="mt-5 pa-9">
 
@@ -86,10 +67,6 @@
     </div>
 
 </MudPaper>
-
-
-
-
 
 
 
@@ -217,13 +194,9 @@
 
 
 
-
-
-
-
     private async Task OpenEditSelectionPercentageResults()
     {
-        SelectionPercentage _selectionPercentage = new()
+        DtoSelectionPercentage _selectionPercentage = new()
             {
                 TestGroup = "GG",
                 TestType = "Alcohol",
@@ -232,18 +205,29 @@
 
         var parameters = new DialogParameters
         {
-            {"selectionPercentage",_selectionPercentage },
-            {"sumthin", "8888" },
-            {"nutthin", "0000" }
+           {"newTestPercentage", _selectionPercentage },
+           {"sumthin", "8888" },
+           {"nutthin", "0000" }
         };
 
         var thedial = DialogService.Show<DialogAddSelectionPercentage>("first parameter is always title???", parameters);
 
         var DialogResults = await thedial.Result;
+
+
         if (DialogResults.Canceled)
         {
             SelectionPercentageMessage = "Was cancelled.";
         }
+        else
+        {
+            var datafromdia = DialogResults.Data as DtoSelectionPercentage;
+            var msg = $"Group: {datafromdia.TestGroup} \t Type: {datafromdia.TestType} \t Percent: {datafromdia.PercentageRequired} ";
+
+            SelectionPercentageMessage = msg;
+    }
+
+
     }
 
 

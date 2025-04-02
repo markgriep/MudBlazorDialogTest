@@ -8,6 +8,14 @@
 
 
 <MudDialog @onkeyup="KeyHandler">
+
+
+    <TitleContent>
+        Edit Selection Percentages
+    </TitleContent>
+
+
+
     <DialogContent>
         <MudFocusTrap>
             <MudStack Spacing="4">
@@ -27,8 +35,8 @@
                     <MudCardContent>
                         <MudText Typo="Typo.caption">Test Type</MudText>
                         <MudRadioGroup @bind-Value="newTestPercentage.TestType">
-                            <MudRadio Value="@("A")" Color="Color.Primary">Drug</MudRadio>
-                            <MudRadio Value="@("D")" Color="Color.Secondary">Alcohol</MudRadio>
+                            <MudRadio Value="@("A")" Color="Color.Primary">Alcohol</MudRadio>
+                            <MudRadio Value="@("D")" Color="Color.Secondary">Drug</MudRadio>
                         </MudRadioGroup>
                     </MudCardContent>
                 </MudPaper>
@@ -37,14 +45,14 @@
                 <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
                     <div style="width: 100%;">
                         <MudNumericField Class="my-3"
-                                         Variant="Variant.Outlined"
-                                         Immediate="true"
-                                         Clearable="true"
-                                         @bind-Value="newTestPercentage.PercentageRequired"
-                                         Label="Percentage Required"
-                                         Min="20"
-                                         Max="65"
-                                         FullWidth="true" />
+                        Variant="Variant.Outlined"
+                        Immediate="true"
+                        Clearable="true"
+                        @bind-Value="newTestPercentage.PercentageRequired"
+                        Label="Percentage Required"
+                        Min="20"
+                        Max="65"
+                        FullWidth="true" />
                     </div>
                 </MudTooltip>
 
@@ -54,23 +62,49 @@
 
     <DialogActions>
         <MudButton OnClick="OnCancel"
-                   Size="Size.Small"
-                   Variant="Variant.Outlined">
+        Size="Size.Small"
+        Variant="Variant.Outlined">
             Cancel <span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(esc)</span>
         </MudButton>
 
         <MudButton Color="Color.Primary"
-                   Size="Size.Small"
-                   Variant="Variant.Outlined"
-                   OnClick="OnSubmit">
+        Size="Size.Small"
+        Variant="Variant.Outlined"
+        OnClick="OnSubmit">
             Ok<span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(F2)</span>
         </MudButton>
     </DialogActions>
 </MudDialog>
 
+
+
+
+
+
+
+
+
+
+
 @code {
-    // [Parameter]
-    public DtoSelectionPercentage newTestPercentage = new DtoSelectionPercentage();
+
+
+
+
+    [Parameter]
+    public DtoSelectionPercentage newTestPercentage { get; set; }
+
+
+
+    [Parameter]
+    public string sumthin { get; set; }
+
+
+
+    [Parameter]
+    public string nutthin { get; set; }
+
+
 
 
       [CascadingParameter]
@@ -83,7 +117,7 @@
 
     protected override void OnInitialized()
     {
-        //newTestPercentage ??= new DtoSelectionPercentage();
+
         MudDialog.SetTitle($"Add New Selection Percentage");
     }
 
