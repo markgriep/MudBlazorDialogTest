@@ -1,42 +1,34 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
-
 @using MudBlazorDialogTest.Models.DtoModels
 @using RandomDrugTest.Core.Models.DtoModels
 @using MudBlazorDialogTest.Models
-
 @using MudBlazor
 
 
 <MudDialog @onkeyup="KeyHandler">
 
-
     <TitleContent>
         Edit Selection Percentages
     </TitleContent>
 
-
-
     <DialogContent>
         <MudFocusTrap>
             <MudForm
-            @ref="foo">
+            @ref="thisForm">
                 <MudStack Spacing="4">
 
                     <MudPaper Outlined="true" Elevation="0">
                         <MudCardContent>
 
-                            <MudText
-                            Typo="Typo.caption">Testing Group</MudText>
+                            <MudText Typo="Typo.caption">Testing Group</MudText>
                             <MudRadioGroup
-                            T="string"
-                            Required="true"
-
-                            RequiredError="Required!"
-
-                            @bind-Value="newTestPercentage.TestGroup">
-                                <MudRadio Value="@("T")" Color="Color.Primary">Transit</MudRadio>
-                                <MudRadio Value="@("N")" Color="Color.Primary">Non-DOT</MudRadio>
-                                <MudRadio Value="@("O")" Color="Color.Primary">Other</MudRadio>
+                                T="string"
+                                Required="true"
+                                RequiredError="Group choice is required!"
+                                    @bind-Value="percentageForTest.TestGroup">
+                                    <MudRadio Value="@("T")" Color="Color.Primary">Transit</MudRadio>
+                                    <MudRadio Value="@("N")" Color="Color.Primary">Non-DOT</MudRadio>
+                                    <MudRadio Value="@("O")" Color="Color.Primary">Other</MudRadio>
                             </MudRadioGroup>
                         </MudCardContent>
                     </MudPaper>
@@ -46,12 +38,12 @@
                             <MudText Typo="Typo.caption">Test Type</MudText>
                             <MudRadioGroup
 
-                            T="string"
-                            Required="true"
-                            RequiredError="Account type is required!"
-                            @bind-Value="newTestPercentage.TestType">
-                                <MudRadio Value="@("A")" Color="Color.Primary">Alcohol</MudRadio>
-                                <MudRadio Value="@("D")" Color="Color.Primary">Drug</MudRadio>
+                                T="string"
+                                Required="true"
+                                RequiredError="Account type is required!"
+                                @bind-Value="percentageForTest.TestType">
+                                    <MudRadio Value="@("A")" Color="Color.Primary">Alcohol</MudRadio>
+                                    <MudRadio Value="@("D")" Color="Color.Primary">Drug</MudRadio>
 
                             </MudRadioGroup>
                         </MudCardContent>
@@ -62,11 +54,11 @@
                     <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
                         <div style="width: 100%;">
                             <MudNumericField Required="true"
-                            RequiredError="Account type is required!" Class="my-3"
+                            RequiredError="Percentage is required!" Class="my-3"
                             Variant="Variant.Outlined"
                             Immediate="true"
                             Clearable="true"
-                            @bind-Value="newTestPercentage.PercentageRequired"
+                            @bind-Value="percentageForTest.PercentageRequired"
                             Label="Percentage Required"
                             Min="20"
                             Max="65"
@@ -96,39 +88,20 @@
 </MudDialog>
 
 
-
-
-
-
-
-
-
-
-
 @code {
-    MudForm foo;
 
+    MudForm thisForm;
 
     [Parameter]
-    public DtoSelectionPercentage newTestPercentage { get; set; }
-
-@code {
-    MudForm foo;
-
-
-
+    public DtoSelectionPercentage percentageForTest { get; set; }
 
 
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
 
 
-
-
-
     protected override void OnInitialized()
     {
-
         MudDialog.SetTitle($"Add New Selection Percentage");
     }
 
@@ -136,34 +109,28 @@
 
     private void OnSubmit()
     {
-        foo.Validate();
+        thisForm.Validate();
 
-        if (foo.IsValid)
+        if (thisForm.IsValid)
         {
-            MudDialog.Close(DialogResult.Ok(newTestPercentage));
+            MudDialog.Close(DialogResult.Ok(percentageForTest));
         }
-
-
-
     }
 
 
-     private void OnCancel() => MudDialog.Cancel();
-
+    private void OnCancel() => MudDialog.Cancel();
 
 
     private void KeyHandler(KeyboardEventArgs e)
     {
         if (e.Key == "F2")
         {
-            //OnSubmit(); Trigger the OK action
+            OnSubmit(); //Trigger the OK action
         }
         else if (e.Key == "Escape")
         {
-            //OnCancel(); Trigger the Cancel action
+            OnCancel(); //Trigger the Cancel action
         }
     }
-
-
 
 }

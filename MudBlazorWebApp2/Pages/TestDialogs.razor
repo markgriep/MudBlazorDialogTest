@@ -33,7 +33,6 @@
 
     <div class="mt-4 ml-4">
         <pre>
-
             <h4>@SelectionPercentageMessage</h4>
         </pre>
     </div>
@@ -180,10 +179,10 @@
 
     private string SelectionPercentageMessage { get; set; } = string.Empty;
 
-
     private string SimpleDialogStringResult { get; set; } = string.Empty;
 
     private string ComplexDialogResult { get; set; } = string.Empty;
+
     private Employee ComplexDialogResultEmployee = new Employee();
 
     private SuperEmployee _SuperEmployee = new SuperEmployee();
@@ -201,7 +200,7 @@
 
         var parameters = new DialogParameters
         {
-           {"newTestPercentage", _selectionPercentage }
+           {"percentageForTest", _selectionPercentage }
 
         };
 
@@ -212,12 +211,12 @@
 
         if (DialogResults.Canceled)
         {
-            SelectionPercentageMessage = "Was cancelled.";
+            SelectionPercentageMessage = "Cancelled.";
         }
         else
         {
-            var datafromdia = DialogResults.Data as DtoSelectionPercentage;
-            var msg = $"Group: {datafromdia.TestGroup} \t Type: {datafromdia.TestType} \t Percent: {datafromdia.PercentageRequired} ";
+            var resultsFromDialog = DialogResults.Data as DtoSelectionPercentage;
+            var msg = $"Group: {resultsFromDialog?.TestGroup} \t Type: {resultsFromDialog?.TestType} \t Percent: {resultsFromDialog?.PercentageRequired} ";
 
             SelectionPercentageMessage = msg;
         }
