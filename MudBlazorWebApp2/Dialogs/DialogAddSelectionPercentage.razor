@@ -1,33 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
+
 @using MudBlazorDialogTest.Models.DtoModels
 @using RandomDrugTest.Core.Models.DtoModels
 @using MudBlazorDialogTest.Models
+
 @using MudBlazor
-@using System.ComponentModel.DataAnnotations
-
-
-
-
-
 
 
 <MudDialog @onkeyup="KeyHandler">
+
+
     <TitleContent>
         Edit Selection Percentages
     </TitleContent>
 
+
+
     <DialogContent>
-
         <MudFocusTrap>
-            <MudForm @ref="form" Model="@newTestPercentage" >
-
+            <MudForm
+            @ref="foo">
                 <MudStack Spacing="4">
 
                     <MudPaper Outlined="true" Elevation="0">
                         <MudCardContent>
-                            <MudText Typo="Typo.caption">Testing Group</MudText>
-                            <MudRadioGroup Required="true" RequiredError="Choose a test Group" @bind-Value="newTestPercentage.TestGroup">
-                                <MudRadio Value="@("T")" Color="Color.Primary" >Transit</MudRadio>
+                            <MudText
+                            Typo="Typo.caption">Testing Group</MudText>
+                            <MudRadioGroup
+                            T="string"
+                            Required="true"
+                            RequiredError="Required!"
+                            @bind-Value="newTestPercentage.TestGroup">
+                                <MudRadio Value="@("T")" Color="Color.Primary">Transit</MudRadio>
                                 <MudRadio Value="@("N")" Color="Color.Primary">Non-DOT</MudRadio>
                                 <MudRadio Value="@("O")" Color="Color.Primary">Other</MudRadio>
                             </MudRadioGroup>
@@ -37,36 +41,36 @@
                     <MudPaper Outlined="true" Elevation="0">
                         <MudCardContent>
                             <MudText Typo="Typo.caption">Test Type</MudText>
-                            <MudRadioGroup Required="true" RequiredError="Choose a test Group" @bind-Value="newTestPercentage.TestType">
+                            <MudRadioGroup
+                            T="string"
+                            Required="true"
+                            RequiredError="Account type is required!"
+                            @bind-Value="newTestPercentage.TestType">
                                 <MudRadio Value="@("A")" Color="Color.Primary">Alcohol</MudRadio>
                                 <MudRadio Value="@("D")" Color="Color.Primary">Drug</MudRadio>
                             </MudRadioGroup>
                         </MudCardContent>
                     </MudPaper>
 
-                    <MudTooltip
-                    Delay="800"
-                    Arrow="true"
-                    Placement="Placement.Left"
-                    Text="Shift + Scroll to change numbers"
-                    >
+                    <!-- Full-width numeric field with tooltip restored -->
+                    <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
                         <div style="width: 100%;">
-                            <MudNumericField Required="true" RequiredError="Choose a test Group"
-                                             @bind-Value="newTestPercentage.PercentageRequired"
-                            Class="my-3"
+                            <MudNumericField Required="true"
+                            RequiredError="Account type is required!" Class="my-3"
                             Variant="Variant.Outlined"
                             Immediate="true"
                             Clearable="true"
+                            @bind-Value="newTestPercentage.PercentageRequired"
                             Label="Percentage Required"
                             Min="20"
                             Max="65"
                             FullWidth="true" />
                         </div>
                     </MudTooltip>
+
                 </MudStack>
             </MudForm>
         </MudFocusTrap>
-
     </DialogContent>
 
     <DialogActions>
@@ -81,7 +85,6 @@
         Variant="Variant.Outlined"
         OnClick="OnSubmit">
             Ok<span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(F2)</span>
-
         </MudButton>
     </DialogActions>
 </MudDialog>
@@ -92,13 +95,19 @@
 
 
 
-@code {
 
-    private MudForm form;
+
+
+
+@code {
+    MudForm foo;
 
 
     [Parameter]
     public DtoSelectionPercentage newTestPercentage { get; set; }
+
+
+
 
 
 
@@ -107,72 +116,49 @@
 
 
 
+
+
+
     protected override void OnInitialized()
     {
+
         MudDialog.SetTitle($"Add New Selection Percentage");
     }
-
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            form?.Validate();
-            Console.WriteLine($"Initial IsValid: {form?.IsValid}");
-        }
-    }
-
 
 
 
 
     private void OnSubmit()
     {
-        // testForm?.Validate();
-        // Console.WriteLine($"###### TestForm IsValid: {testForm?.IsValid}");
+        foo.Validate();
 
-
-
-
-        Console.WriteLine($"TestGroup: {newTestPercentage.TestGroup}, TestType: {newTestPercentage.TestType}, Percentage: {newTestPercentage.PercentageRequired}");
-        form.Validate();
-        Console.WriteLine($"IsValid: {form.IsValid}");
-        if (form.IsValid)
+        if (foo.IsValid)
         {
             MudDialog.Close(DialogResult.Ok(newTestPercentage));
         }
 
 
 
-        // form.Validate();        //method that tells EditContext to check model against its attributes
-
-        // if (form.IsValid)
-        // {
-        //     MudDialog.Close(DialogResult.Ok(newTestPercentage));
-        // }
-
-
-
-
-
-
     }
 
 
-    private void OnCancel() => MudDialog.Cancel();
+     private void OnCancel() => MudDialog.Cancel();
+
+
 
 
     private void KeyHandler(KeyboardEventArgs e)
     {
         if (e.Key == "F2")
         {
-            OnSubmit(); //Trigger the OK action
+            //OnSubmit(); Trigger the OK action
         }
         else if (e.Key == "Escape")
         {
-            OnCancel(); //Trigger the Cancel action
+            //OnCancel(); Trigger the Cancel action
         }
     }
+
 
 
 }
