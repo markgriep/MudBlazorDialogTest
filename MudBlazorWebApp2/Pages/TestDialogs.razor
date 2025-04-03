@@ -34,7 +34,7 @@
     <div class="mt-4 ml-4">
         <pre>
 
-        <h4>@SelectionPercentageMessage</h4>
+            <h4>@SelectionPercentageMessage</h4>
         </pre>
     </div>
 
@@ -196,18 +196,13 @@
 
     private async Task OpenEditSelectionPercentageResults()
     {
-        DtoSelectionPercentage _selectionPercentage = new()
-            {
-                TestGroup = "GG",
-                TestType = "Alcohol",
-                PercentageRequired = 49
-            };
+        DtoSelectionPercentage _selectionPercentage = new();
+
 
         var parameters = new DialogParameters
         {
-           {"newTestPercentage", _selectionPercentage },
-           {"sumthin", "8888" },
-           {"nutthin", "0000" }
+           {"newTestPercentage", _selectionPercentage }
+
         };
 
         var thedial = DialogService.Show<DialogAddSelectionPercentage>("first parameter is always title???", parameters);
@@ -225,7 +220,7 @@
             var msg = $"Group: {datafromdia.TestGroup} \t Type: {datafromdia.TestType} \t Percent: {datafromdia.PercentageRequired} ";
 
             SelectionPercentageMessage = msg;
-    }
+        }
 
 
     }
