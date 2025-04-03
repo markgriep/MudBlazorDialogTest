@@ -18,45 +18,58 @@
 
     <DialogContent>
         <MudFocusTrap>
-            <MudStack Spacing="4">
+            <MudForm
+            @ref="foo">
+                <MudStack Spacing="4">
 
-                <MudPaper Outlined="true" Elevation="0">
-                    <MudCardContent>
-                        <MudText Typo="Typo.caption">Testing Group</MudText>
-                        <MudRadioGroup @bind-Value="newTestPercentage.TestGroup">
-                            <MudRadio Value="@("T")" Color="Color.Primary">Transit</MudRadio>
-                            <MudRadio Value="@("N")" Color="Color.Primary">Non-DOT</MudRadio>
-                            <MudRadio Value="@("O")" Color="Color.Primary">Other</MudRadio>
-                        </MudRadioGroup>
-                    </MudCardContent>
-                </MudPaper>
+                    <MudPaper Outlined="true" Elevation="0">
+                        <MudCardContent>
+                            <MudText
+                            Typo="Typo.caption">Testing Group</MudText>
+                            <MudRadioGroup
+                            T="string"
+                            Required="true"
+                            RequiredError="Account type is required!"
+                            @bind-Value="newTestPercentage.TestGroup">
+                                <MudRadio Value="@("T")" Color="Color.Primary">Transit</MudRadio>
+                                <MudRadio Value="@("N")" Color="Color.Primary">Non-DOT</MudRadio>
+                                <MudRadio Value="@("O")" Color="Color.Primary">Other</MudRadio>
+                            </MudRadioGroup>
+                        </MudCardContent>
+                    </MudPaper>
 
-                <MudPaper Outlined="true" Elevation="0">
-                    <MudCardContent>
-                        <MudText Typo="Typo.caption">Test Type</MudText>
-                        <MudRadioGroup @bind-Value="newTestPercentage.TestType">
-                            <MudRadio Value="@("A")" Color="Color.Primary">Alcohol</MudRadio>
-                            <MudRadio Value="@("D")" Color="Color.Primary">Drug</MudRadio>
-                        </MudRadioGroup>
-                    </MudCardContent>
-                </MudPaper>
+                    <MudPaper Outlined="true" Elevation="0">
+                        <MudCardContent>
+                            <MudText Typo="Typo.caption">Test Type</MudText>
+                            <MudRadioGroup
+                            T="string"
+                            Required="true"
+                            RequiredError="Account type is required!"
+                            @bind-Value="newTestPercentage.TestType">
+                                <MudRadio Value="@("A")" Color="Color.Primary">Alcohol</MudRadio>
+                                <MudRadio Value="@("D")" Color="Color.Primary">Drug</MudRadio>
+                            </MudRadioGroup>
+                        </MudCardContent>
+                    </MudPaper>
 
-                <!-- Full-width numeric field with tooltip restored -->
-                <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
-                    <div style="width: 100%;">
-                        <MudNumericField Class="my-3"
-                        Variant="Variant.Outlined"
-                        Immediate="true"
-                        Clearable="true"
-                        @bind-Value="newTestPercentage.PercentageRequired"
-                        Label="Percentage Required"
-                        Min="20"
-                        Max="65"
-                        FullWidth="true" />
-                    </div>
-                </MudTooltip>
+                    <!-- Full-width numeric field with tooltip restored -->
+                    <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
+                        <div style="width: 100%;">
+                            <MudNumericField Required="true"
+                            RequiredError="Account type is required!" Class="my-3"
+                            Variant="Variant.Outlined"
+                            Immediate="true"
+                            Clearable="true"
+                            @bind-Value="newTestPercentage.PercentageRequired"
+                            Label="Percentage Required"
+                            Min="20"
+                            Max="65"
+                            FullWidth="true" />
+                        </div>
+                    </MudTooltip>
 
-            </MudStack>
+                </MudStack>
+            </MudForm>
         </MudFocusTrap>
     </DialogContent>
 
@@ -87,8 +100,7 @@
 
 
 @code {
-
-
+    MudForm foo;
 
 
     [Parameter]
@@ -96,19 +108,11 @@
 
 
 
-    [Parameter]
-    public string sumthin { get; set; }
 
 
 
-    [Parameter]
-    public string nutthin { get; set; }
-
-
-
-
-      [CascadingParameter]
-      private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
 
 
 
@@ -126,8 +130,15 @@
 
     private void OnSubmit()
     {
+        foo.Validate();
 
-        MudDialog.Close(DialogResult.Ok(newTestPercentage));
+        if (foo.IsValid)
+        {
+            MudDialog.Close(DialogResult.Ok(newTestPercentage));
+        }
+
+
+
     }
 
 
