@@ -4,7 +4,6 @@
 @using MudBlazorDialogTest.Models
 @using MudBlazor
 
-
 <MudDialog @onkeyup="KeyHandler">
 
     <TitleContent>
@@ -19,7 +18,6 @@
 
                     <MudPaper Outlined="true" Elevation="0">
                         <MudCardContent>
-
                             <MudText Typo="Typo.caption">Testing Group</MudText>
                             <MudRadioGroup
                                 T="string"
@@ -49,8 +47,6 @@
                         </MudCardContent>
                     </MudPaper>
 
-
-                    <!-- Full-width numeric field with tooltip restored -->
                     <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
                         <div style="width: 100%;">
                             <MudTextField @bind-Value="percentageForTest.PercentageRequired" Label="Percentage Required" Variant="Variant.Outlined" Immediate="true" Clearable="true" FullWidth="true" Required="true" RequiredError="Percentage is required!" InputType="InputType.Number" Min="20" Max="65" />
@@ -97,9 +93,7 @@
         }
     }
 
-
     private void OnCancel() => MudDialog.Cancel();
-
 
     private void KeyHandler(KeyboardEventArgs e)
     {
@@ -113,5 +107,4 @@
                 break;
         }
     }
-
 }
