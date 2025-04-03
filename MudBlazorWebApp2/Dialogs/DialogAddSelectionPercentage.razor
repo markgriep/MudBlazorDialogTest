@@ -53,16 +53,7 @@
                     <!-- Full-width numeric field with tooltip restored -->
                     <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
                         <div style="width: 100%;">
-                            <MudNumericField Required="true"
-                            RequiredError="Percentage is required!" Class="my-3"
-                            Variant="Variant.Outlined"
-                            Immediate="true"
-                            Clearable="true"
-                            @bind-Value="percentageForTest.PercentageRequired"
-                            Label="Percentage Required"
-                            Min="20"
-                            Max="65"
-                            FullWidth="true" />
+                            <MudTextField @bind-Value="percentageForTest.PercentageRequired" Label="Percentage Required" Variant="Variant.Outlined" Immediate="true" Clearable="true" FullWidth="true" Required="true" RequiredError="Percentage is required!" InputType="InputType.Number" Min="20" Max="65" />
                         </div>
                     </MudTooltip>
 
@@ -72,44 +63,33 @@
     </DialogContent>
 
     <DialogActions>
-        <MudButton OnClick="OnCancel"
-        Size="Size.Small"
-        Variant="Variant.Outlined">
+        <MudButton OnClick="OnCancel" Size="Size.Small" Variant="Variant.Outlined">
             Cancel <span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(esc)</span>
         </MudButton>
 
-        <MudButton Color="Color.Primary"
-        Size="Size.Small"
-        Variant="Variant.Outlined"
-        OnClick="OnSubmit">
+        <MudButton Color="Color.Primary" Size="Size.Small" Variant="Variant.Outlined" OnClick="OnSubmit">
             Ok<span style="font-size: 0.8em; font-weight: lighter; color: gray; padding-left: 8px;">(F2)</span>
         </MudButton>
     </DialogActions>
 </MudDialog>
 
-
 @code {
-
-    MudForm thisForm;
+    private MudForm thisForm;
 
     [Parameter]
     public DtoSelectionPercentage percentageForTest { get; set; }
 
-
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; } = new MudDialogInstance();
 
-
     protected override void OnInitialized()
     {
-        MudDialog.SetTitle($"Add New Selection Percentage");
+        MudDialog.SetTitle("Add New Selection Percentage");
     }
 
-
-
-    private void OnSubmit()
+    private async Task OnSubmit()
     {
-        thisForm.Validate();
+        await thisForm.Validate();
 
         if (thisForm.IsValid)
         {
@@ -123,13 +103,14 @@
 
     private void KeyHandler(KeyboardEventArgs e)
     {
-        if (e.Key == "F2")
+        switch (e.Key)
         {
-            OnSubmit(); //Trigger the OK action
-        }
-        else if (e.Key == "Escape")
-        {
-            OnCancel(); //Trigger the Cancel action
+            case "F2":
+                OnSubmit();
+                break;
+            case "Escape":
+                OnCancel();
+                break;
         }
     }
 
