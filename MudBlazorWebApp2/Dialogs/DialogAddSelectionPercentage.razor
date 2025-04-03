@@ -25,8 +25,8 @@
                         <MudText Typo="Typo.caption">Testing Group</MudText>
                         <MudRadioGroup @bind-Value="newTestPercentage.TestGroup">
                             <MudRadio Value="@("T")" Color="Color.Primary">Transit</MudRadio>
-                            <MudRadio Value="@("N")" Color="Color.Secondary">Non-DOT</MudRadio>
-                            <MudRadio Value="@("O")">Other</MudRadio>
+                            <MudRadio Value="@("N")" Color="Color.Primary">Non-DOT</MudRadio>
+                            <MudRadio Value="@("O")" Color="Color.Primary">Other</MudRadio>
                         </MudRadioGroup>
                     </MudCardContent>
                 </MudPaper>
@@ -36,7 +36,7 @@
                         <MudText Typo="Typo.caption">Test Type</MudText>
                         <MudRadioGroup @bind-Value="newTestPercentage.TestType">
                             <MudRadio Value="@("A")" Color="Color.Primary">Alcohol</MudRadio>
-                            <MudRadio Value="@("D")" Color="Color.Secondary">Drug</MudRadio>
+                            <MudRadio Value="@("D")" Color="Color.Primary">Drug</MudRadio>
                         </MudRadioGroup>
                     </MudCardContent>
                 </MudPaper>
