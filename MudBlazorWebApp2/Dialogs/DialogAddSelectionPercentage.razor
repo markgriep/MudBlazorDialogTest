@@ -46,13 +46,20 @@
                             </MudRadioGroup>
                         </MudCardContent>
                     </MudPaper>
-
-                    <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
                         <div style="width: 100%;">
-                            <MudTextField @bind-Value="percentageForTest.PercentageRequired" Label="Percentage Required" Variant="Variant.Outlined" Immediate="true" Clearable="true" FullWidth="true" Required="true" RequiredError="Percentage is required!" InputType="InputType.Number" Min="20" Max="65" />
+                            <MudTextField
+                                @bind-Value="percentageForTest.PercentageRequired"
+                                Label="Percentage Required"
+                                Variant="Variant.Outlined"
+                                Immediate="true"
+                                Clearable="false"
+                                FullWidth="true"
+                                Required="true"
+                                RequiredError="Percentage is requireddddd!"
+                                InputType="InputType.Number"
+                                Min="20"
+                                Max="65" />
                         </div>
-                    </MudTooltip>
-
                 </MudStack>
             </MudForm>
         </MudFocusTrap>

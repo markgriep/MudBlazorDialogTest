@@ -10,10 +10,7 @@ namespace MudBlazorDialogTest.Models.DtoModels
 {
     public class DtoSelectionPercentage
     {
-
-        
         public string? TestGroup { get; set; }
-
 
 
         public string? TestType { get; set; }
@@ -23,6 +20,5 @@ namespace MudBlazorDialogTest.Models.DtoModels
 
 
         public int? PercentageRequired { get; set; }
-
     }
 }
