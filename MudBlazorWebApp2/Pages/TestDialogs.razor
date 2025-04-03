@@ -197,15 +197,12 @@
     private async Task OpenEditSelectionPercentageResults()
     {
         DtoSelectionPercentage _selectionPercentage = new();
-        // {
-            //     TestGroup = "GG",
-            //     TestType = "Alcohol",
-            //     PercentageRequired = 49
-            // };
+
 
         var parameters = new DialogParameters
         {
            {"newTestPercentage", _selectionPercentage }
+
         };
 
         var thedial = DialogService.Show<DialogAddSelectionPercentage>("first parameter is always title???", parameters);
@@ -224,6 +221,7 @@
 
             SelectionPercentageMessage = msg;
         }
+
     }
 
 

@@ -24,12 +24,15 @@
 
                     <MudPaper Outlined="true" Elevation="0">
                         <MudCardContent>
+
                             <MudText
                             Typo="Typo.caption">Testing Group</MudText>
                             <MudRadioGroup
                             T="string"
                             Required="true"
+
                             RequiredError="Required!"
+
                             @bind-Value="newTestPercentage.TestGroup">
                                 <MudRadio Value="@("T")" Color="Color.Primary">Transit</MudRadio>
                                 <MudRadio Value="@("N")" Color="Color.Primary">Non-DOT</MudRadio>
@@ -42,15 +45,18 @@
                         <MudCardContent>
                             <MudText Typo="Typo.caption">Test Type</MudText>
                             <MudRadioGroup
+
                             T="string"
                             Required="true"
                             RequiredError="Account type is required!"
                             @bind-Value="newTestPercentage.TestType">
                                 <MudRadio Value="@("A")" Color="Color.Primary">Alcohol</MudRadio>
                                 <MudRadio Value="@("D")" Color="Color.Primary">Drug</MudRadio>
+
                             </MudRadioGroup>
                         </MudCardContent>
                     </MudPaper>
+
 
                     <!-- Full-width numeric field with tooltip restored -->
                     <MudTooltip Delay="800" Arrow="true" Placement="Placement.Left" Text="Shift + Scroll to change numbers">
@@ -106,6 +112,8 @@
     [Parameter]
     public DtoSelectionPercentage newTestPercentage { get; set; }
 
+@code {
+    MudForm foo;
 
 
 
@@ -118,13 +126,11 @@
 
 
 
-
     protected override void OnInitialized()
     {
 
         MudDialog.SetTitle($"Add New Selection Percentage");
     }
-
 
 
 
@@ -143,7 +149,6 @@
 
 
      private void OnCancel() => MudDialog.Cancel();
-
 
 
 
