@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+
+
+<MudPaper Outlined="true" Square="true" Class="ma-4 pa-4">
+
+<div class="test-details-container">
+    <h4>The DETAILS for Test #@TestNumber</h4>
+
+
+
+
+
+
+    <div class="test-details-content">
+        @if (IsLoading)
+        {
+            <p>Loading test details...</p>
+        }
+        else
+        {
+            <dl>
+                    <dt>Test ID: @TestNumber</dt>
+                    <dd>Results:
+                        <span class="@(IsPass ? "pass-result" : "fail-result")">@(IsPass ? "Pass" : "Fail")</span>
+                        (this is just random)</dd>
+            </dl>
+        }
+    </div>
+</div>
+</MudPaper>
+
+@code {
+
+    // This item is for getting variable from calling razor page
+    [Parameter]
+    public int TestNumber { get; set; }
+
+    private bool IsLoading { get; set; } = true;
+    private bool IsPass { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate loading data
+        await Task.Delay(800);
+
+        // Generate a random pass/fail result
+        Random random = new Random();
+        IsPass = random.Next(2) == 0;
+
+        IsLoading = false;
+    }
+}

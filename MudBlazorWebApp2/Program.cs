@@ -9,6 +9,19 @@ namespace MudBlazorDialogTest
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+#if DEBUG
+
+            builder.Logging.ClearProviders();
+            builder.Logging.SetMinimumLevel(LogLevel.Critical);
+            Console.WriteLine($"Lowered logging for debug.");
+
+#endif
+
+
+
+
+
             // Add MudBlazor services
             builder.Services.AddMudServices();
 

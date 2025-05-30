@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+
+
+@page "/testResults/{TestNumber:int}"
+
+
+
+
+
+
+<div class="test-results-container">
+<h3>The Results for test number @TestNumber</h3>
+
+
+    @if (TestNumber > 100)
+    {
+        @* NOTE how to call and pass a paraemeter to the called page *@
+        <TestDetailsLegacy TestNumber="@TestNumber" />
+    }
+    else
+    {
+        @* NOTE how to call and pass a paraemeter to the called page *@
+        <TestDetails TestNumber="@TestNumber" />
+    }
+
+
+
+
+</div>
+
+@code {
+    [Parameter]
+    public int TestNumber { get; set; }                 // incoming parameter
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+
+
+<MudPaper Elevation="14" Class="ma-4 pa-4 rounded-xl" >
+
+<div class="test-details-container">
+        <MudText Typo="Typo.h3" Style="font-family: 'Italianno', cursive; color: #666666; font-size: 3rem;">
+            Legacy details for test number @TestNumber
+        </MudText>
+
+
+
+
+    <div class="test-details-content">
+        @if (IsLoading)
+        {
+            <p>Loading test details...</p>
+        }
+        else
+        {
+            <dl>
+                    <dt Style="font-family: 'Italianno', cursive; color: #666666; font-size: 2.5rem;">Test ID: @TestNumber</dt>
+
+
+            </dl>
+        }
+    </div>
+</div>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public int TestNumber { get; set; }
+
+    private bool IsLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate loading data
+        await Task.Delay(700);
+        IsLoading = false;
+    }
+}
