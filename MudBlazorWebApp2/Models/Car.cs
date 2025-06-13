@@ -23,5 +23,8 @@ namespace MudBlazorDialogTest.Models
         [StringLength(10, ErrorMessage = "Description can't exceed 10 characters.")]
         public string Description { get; set; }
 
+
+        public TimeOnly Time { get; set; }
+
     }
 }
